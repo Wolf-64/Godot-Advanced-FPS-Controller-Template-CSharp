@@ -1,6 +1,6 @@
 An advanced FPS Controller Template made in Godot 4
 
-#General
+##General
 
 This controller provides a complete, advanced and fully commented set of movements and camera, as well as a properties HUD
 
