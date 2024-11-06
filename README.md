@@ -34,13 +34,13 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
 All keys bindings can be modified
 
-- W, S, A, D (alternatively : up, down, left, right) ----> move / wall run
-- Space ----> jump
-- Left shift ----> run
-- C ----> crouch / slide
-- Left control ----> dash
-- Escape ----> mouse control
-
+- W, S, A, D (alternatively : up, down, left, right) = move / wall run
+- Space = jump
+- Left shift = run
+- C = crouch / slide
+- Left control = dash
+- Escape = mouse control
+- 
 #**Purpose**
 
 My main goal with this project was to provide a complete and easy to manage/modify controller for FPS games (It can be apply to first person games in general, even if the movement list has been thinking as an FPS one)
