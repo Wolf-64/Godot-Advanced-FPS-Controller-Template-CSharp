@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://oj3blpxqf1bl"]
 
-[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacters/PlayerCharacterV2Scene.tscn" id="1_ur3pi"]
-[ext_resource type="Script" path="res://Scripts/Others/JumppadScript.gd" id="2_8nruh"]
-[ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_03.png" id="3_f7i47"]
-[ext_resource type="Texture2D" uid="uid://cosanfwg57e4y" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="4_mleog"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterV2Scene.tscn" id="1_k3b4y"]
+[ext_resource type="Texture2D" uid="uid://cosanfwg57e4y" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_2pxo8"]
+[ext_resource type="Texture2D" uid="uid://c3wt61i40kd0n" path="res://Arts/Textures/kenney_prototype_textures/dark/texture_03.png" id="3_wjaii"]
+[ext_resource type="Script" path="res://Scripts/Others/JumppadScript.gd" id="4_vtgn2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fjbi6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,25 +19,25 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3yst"]
-albedo_texture = ExtResource("4_mleog")
+albedo_texture = ExtResource("2_2pxo8")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st80m"]
-albedo_texture = ExtResource("3_f7i47")
+albedo_texture = ExtResource("3_wjaii")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygjqq"]
-albedo_texture = ExtResource("3_f7i47")
+albedo_texture = ExtResource("3_wjaii")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_linps"]
-albedo_texture = ExtResource("3_f7i47")
+albedo_texture = ExtResource("3_wjaii")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -50,6 +50,7 @@ height = 0.15
 radius = 2.0
 
 [node name="Level3" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -62,8 +63,8 @@ shadow_enabled = true
 
 [node name="PlayerCharacter" type="Node3D" parent="."]
 
-[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_ur3pi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2006, 1.89854, 0)
+[node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_k3b4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5544, 1.54036, 0)
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -227,7 +228,7 @@ use_collision = true
 collision_mask = 2
 radius = 2.0
 height = 0.15
-script = ExtResource("2_8nruh")
+script = ExtResource("4_vtgn2")
 jumpBoostValue = 22.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad"]
@@ -244,7 +245,7 @@ use_collision = true
 collision_mask = 2
 radius = 2.0
 height = 0.15
-script = ExtResource("2_8nruh")
+script = ExtResource("4_vtgn2")
 jumpBoostValue = 29.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad3"]
@@ -261,7 +262,7 @@ use_collision = true
 collision_mask = 2
 radius = 2.0
 height = 0.15
-script = ExtResource("2_8nruh")
+script = ExtResource("4_vtgn2")
 jumpBoostValue = 34.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad2"]
@@ -278,7 +279,7 @@ use_collision = true
 collision_mask = 2
 radius = 2.0
 height = 0.15
-script = ExtResource("2_8nruh")
+script = ExtResource("4_vtgn2")
 jumpBoostValue = 34.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad4"]
