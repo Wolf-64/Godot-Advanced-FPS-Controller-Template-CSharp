@@ -18,16 +18,16 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
 #**Features**
 
-
- - Walk
- - Crouch
- - Run
- - Jump (multiple jump system)
+ - Smooth moving
+ - Walking
+ - Crouching
+ - Running
+ - Jumping (multiple jump system)
  - Air control
- - Slide (and air slide)
- - Dash
- - Bunny hop
- - Wall run
+ - Sliding (and air slide)
+ - Dashing
+ - Bunny hopping
+ - Wall running
 
  - Camera tilt
  - Camera bob
