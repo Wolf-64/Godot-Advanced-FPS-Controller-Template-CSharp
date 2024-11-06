@@ -8,6 +8,7 @@ This template provides a complete, advanced and fully commented controller, came
 A template map is provided to test the controller.
 
 The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
+
 He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
 
 The template works on Godot 4.3 and Godot 4.2.
