@@ -5,6 +5,7 @@ An advanced FPS Controller Template made in Godot 4
 
 
 This template provides a complete, advanced and fully commented controller, camera, as well as a properties HUD
+
 A template map is provided to test the controller.
 
 The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
