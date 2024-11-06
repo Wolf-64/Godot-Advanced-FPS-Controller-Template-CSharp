@@ -1,7 +1,8 @@
 
 An advanced FPS Controller Template made in Godot 4
 
-! [template logo](Arts/Template images/Logo.png)
+
+![Template logo](Arts/TemplateImages/Logo.png)
 
 
 # **General**
@@ -15,8 +16,12 @@ The controller use a finite state machine, designed to be easely editable, allow
 
 He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
 
-The template works on Godot 4.3 and Godot 4.2.
+The template is 100% written in GDScript.
+
+He works on Godot 4.3 and Godot 4.2.
 I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
+
+Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
 
 
 # **Features**
@@ -60,7 +65,7 @@ My main goal with this project was to provide a complete and easy to manage/modi
 
 I hope that it will be the case.
 
-I didn't found any bug during the last tests, but i probably missed out a few, so if you found any, feel free to tell me on Github.
+I didn't found any bug during the last tests, but i probably missed out a few, so if you find out a bug, feel free to tell me in response to my comment in the showcase video.
 
 
 # **How to use**
