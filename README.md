@@ -1,13 +1,13 @@
 An advanced FPS Controller Template made in Godot 4
 
-**General**
+#**General**
 
 This controller provides a complete, advanced and fully commented set of movements and camera, as well as a properties HUD
 
 The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
 He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
 
-**Features**
+#**Features**
 
  - Walk
  - Crouch
@@ -26,7 +26,7 @@ He is also very customizable, with a whole set of open variables for every state
  - Integrate crosshair
  - Properties HUD
 
-**Purpose**
+#**Purpose**
 
 My main goal with this project was to provide a complete and easy to manage/modify controller for FPS games (It can be apply to first person games in general, even if the movement list has been thinking as an FPS one)
 I hope that it will be the case.
