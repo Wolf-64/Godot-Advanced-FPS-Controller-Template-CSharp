@@ -50,7 +50,6 @@ height = 0.15
 radius = 2.0
 
 [node name="Level3" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
