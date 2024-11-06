@@ -2,7 +2,7 @@
 An advanced FPS Controller Template made in Godot 4
 
 
-! [Template logo](Arts/TemplateImages/Logo.png)
+![Template logo](Arts/TemplateImages/Logo.png)
 
 
 # **General**
