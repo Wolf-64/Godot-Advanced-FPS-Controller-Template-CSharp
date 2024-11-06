@@ -52,7 +52,9 @@ All keys bindings can be modified
 
 
 My main goal with this project was to provide a complete and easy to manage/modify controller for FPS games (It can be apply to first person games in general, even if the movement list has been thinking as an FPS one)
+
 I hope that it will be the case.
+
 I didn't found any bug during the last tests, but i probably missed out a few, so if you found any, feel free to tell me on Github.
 
 
@@ -60,6 +62,7 @@ I didn't found any bug during the last tests, but i probably missed out a few, s
 
 
 This plugin is a template, which means it's a project that has been designed to be a base of a new project, not an addon to an existing one.
+
 So to correctly use it, you simply have to download it, and then import the project on the Godot app welcome page, and that's all !
  
  
