@@ -1,0 +1,263 @@
+[gd_scene load_steps=13 format=3 uid="uid://bwggrf7sbmkcv"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDScript.gd" id="3_l04tv"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/HUDRedimensionmentScript.gd" id="5_jgfg0"]
+[ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5yjma"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1gb5t"]
+height = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bkys"]
+albedo_color = Color(0.196078, 0.223529, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p2iaj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cdisy"]
+frequency = 0.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_78nux"]
+noise = SubResource("FastNoiseLite_cdisy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk5op"]
+shader = ExtResource("12_8u6b8")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_count = 2.0
+shader_parameter/line_density = 0.8
+shader_parameter/line_faloff = 1.0
+shader_parameter/mask_size = 0.1
+shader_parameter/mask_edge = 0.8
+shader_parameter/animation_speed = 20.0
+shader_parameter/noise = SubResource("NoiseTexture2D_78nux")
+
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
+collision_layer = 2
+floor_block_on_wall = false
+floor_max_angle = 1.309
+floor_snap_length = 0.0
+platform_floor_layers = 4294901761
+script = ExtResource("1_5dbx1")
+maxSpeed = 50.0
+walkSpeed = 11.0
+runSpeed = 20.0
+crouchSpeed = 7.0
+slideSpeedAddon = 8.0
+dashSpeed = 120.0
+walkAcceleration = 10.0
+runAcceleration = 8.0
+crouchAcceleration = 6.0
+walkDecceleration = 10.0
+runDecceleration = 8.0
+crouchDecceleration = 6.0
+inAirMoveSpeed = 5.0
+hitGroundCooldown = 0.2
+jumpHeight = 3.0
+jumpTimeToPeak = 0.3
+jumpTimeToFall = 0.35
+jumpCooldown = 0.25
+nbJumpsInAirAllowed = 1
+slideTime = 1.0
+timeBeforeCanSlideAgain = 0.5
+wallJumpVelocity = 3.0
+dashTime = 0.09
+timeBeforeCanDashAgain = 2.0
+wallGravityMultiplier = 0.7
+
+[node name="standingHitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5yjma")
+
+[node name="crouchingHitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("CapsuleShape3D_1gb5t")
+disabled = true
+
+[node name="CameraHolder" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.715, 0)
+script = ExtResource("2_x12n0")
+XAxisSensibility = 0.008
+YAxisSensibility = 0.008
+maxUpAngleView = -90.0
+maxDownAngleView = 90.0
+crouchCameraDepth = -0.2
+crouchCameraLerpSpeed = 8.0
+slideCameraDepth = -0.5
+slideCameraLerpSpeed = 8.0
+baseFOV = 90.0
+crouchFOV = 75.0
+runFOV = 100.0
+slideFOV = 120.0
+dashFOV = 150.0
+fovChangeSpeed = 4.0
+fovChangeSpeedWhenDash = 3.0
+bobFrequency = 0.8
+bobAmplitude = 0.06
+camTiltRotationValue = 0.35
+camTiltRotationSpeed = 2.2
+mouseInputSpeed = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder"]
+cull_mask = 1
+current = true
+fov = 100.0
+near = 0.01
+far = 1000.0
+
+[node name="CeilingCheck" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758088, 0)
+visible = false
+exclude_parent = false
+target_position = Vector3(0, 4, 0)
+collide_with_areas = true
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+material_override = SubResource("StandardMaterial3D_6bkys")
+mesh = SubResource("CapsuleMesh_p2iaj")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="standingHitbox2" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_5yjma")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+script = ExtResource("3_l04tv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Reticle" type="CenterContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLine" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="BottomLine" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="RightLine" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="LeftLine" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="SpeedLinesContrainer" type="ColorRect" parent="HUD"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_fk5op")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 811.0
+offset_bottom = 350.0
+script = ExtResource("5_jgfg0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentStateLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Current state : "
+
+[node name="MoveSpeedLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Move speed : "
+
+[node name="DesiredMoveSpeedLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Desired move speed : "
+
+[node name="VelocityLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Velocity : 
+"
+
+[node name="FramesPerSecondLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Frames per seconds : "
+
+[node name="NbJumpsInAirLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Number jumps allowed in air : "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="CurrentStateLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="MoveSpeedLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="DesiredMoveSpeedLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="VelocityLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="FramesPerSecondLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
+
+[node name="NbJumpsInAirLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "..................."
