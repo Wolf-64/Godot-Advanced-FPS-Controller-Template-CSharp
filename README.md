@@ -33,11 +33,11 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 #**Controls**
 All keys bindings can be modified
 
-W, S, A, D = move / wall run
-Left shift = run
-C = crouch / slide
-Left control = dash
-Escape = mouse control
+- W, S, A, D = move / wall run
+- Left shift = run
+- C = crouch / slide
+- Left control = dash
+- Escape = mouse control
 
 #**Purpose**
 
