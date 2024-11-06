@@ -61,7 +61,7 @@ My main goal with this project was to provide a complete and easy to manage/modi
 
 I hope that it will be the case.
 
-I didn't found any bug during the last tests, but i probably missed out a few, so if you found any, feel free to tell me on Github.
+I didn't found any bug during the last tests, but i probably missed out a few, i hope i don't.
 
 
 # **How to use**
