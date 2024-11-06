@@ -4,8 +4,9 @@ This controller provides a complete, advanced and fully commented set of movemen
 
 The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
 He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
- 
-Here's the list of all the available features : 
+
+Features : 
+
  - Walk
  - Crouch
  - Run
