@@ -31,7 +31,7 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
  - Camera tilt
  - Camera bob
- - Custom FOV
+ - Custom smooth FOV
    
  - Crosshair
  - Properties HUD
