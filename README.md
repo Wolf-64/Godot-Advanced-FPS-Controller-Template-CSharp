@@ -19,6 +19,8 @@ He is also very customizable, with a whole set of open variables for every state
 The template works on Godot 4.3 and Godot 4.2.
 I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
+The template is 100% written in GDScript.
+
 Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
 
 
@@ -63,7 +65,7 @@ My main goal with this project was to provide a complete and easy to manage/modi
 
 I hope that it will be the case.
 
-I didn't found any bug during the last tests, but i probably missed out a few, if you find out a bug, feel free to tell me in response to my comment in the showcase video.
+I didn't found any bug during the last tests, but i probably missed out a few, so if you find out a bug, feel free to tell me in response to my comment in the showcase video.
 
 
 # **How to use**
