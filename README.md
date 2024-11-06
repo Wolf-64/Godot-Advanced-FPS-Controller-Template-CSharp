@@ -3,7 +3,7 @@ An advanced FPS Controller Template made in Godot 4
 #**General**
 
 This template provides a complete, advanced and fully commented controller, camera, as well as a properties HUD
-A template map is available to test it.
+A template map is provided to test the controller.
 
 The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
 He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
@@ -29,6 +29,15 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
   
  - Integrate crosshair
  - Properties HUD
+
+#**Controls**
+All keys bindings can be modified
+
+W, S, A, D = move / wall run
+Left shift = run
+C = crouch / slide
+Left control = dash
+Escape = mouse control
 
 #**Purpose**
 
