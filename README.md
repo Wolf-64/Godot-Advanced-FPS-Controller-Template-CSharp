@@ -31,6 +31,7 @@ I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
  - Properties HUD
 
 #**Controls**
+
 All keys bindings can be modified
 
 - W, S, A, D (alternatively : up, down, left, right) = move / wall run
