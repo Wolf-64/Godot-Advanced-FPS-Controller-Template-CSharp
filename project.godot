@@ -13,7 +13,7 @@ config_version=5
 config/name="Godot Advanced FPS Controller Plugin Project"
 run/main_scene="res://Scenes/TemplateMapScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Arts/Template images/Icon.png"
+config/icon="res://Arts/TemplateImages/Icon.png"
 
 [display]
 
