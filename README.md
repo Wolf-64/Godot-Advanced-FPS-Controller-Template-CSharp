@@ -19,6 +19,8 @@ He is also very customizable, with a whole set of open variables for every state
 The template works on Godot 4.3 and Godot 4.2.
 I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
+Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
+
 
 # **Features**
 
