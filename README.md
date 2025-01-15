@@ -65,7 +65,6 @@ All keys bindings can be modified
 - Left mouse button = grapple hook
 - Right click button = knockback tool
 
-
 # **Purpose**
 
 
