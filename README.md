@@ -26,6 +26,7 @@ Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYg
 
 # **Features**
 
+
  - Smooth moving
  - Walking
  - Crouching
@@ -64,6 +65,7 @@ All keys bindings can be modified
 - Escape = pause menu
 - Left mouse button = grapple hook
 - Right click button = knockback tool
+
 
 # **Purpose**
 
