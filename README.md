@@ -61,9 +61,10 @@ All keys bindings can be modified
 - Left shift = run
 - C = crouch / slide
 - Left control = dash
-- Escape = mouse control
+- Escape = pause menu
+- E = Grapple hook
 
-  
+
 # **Purpose**
 
 
