@@ -39,33 +39,42 @@ var addonFOV : float
 #tilt variables
 @export_group("tilt variables")
 @export var camTiltRotationValue : float 
-@export var camTiltRotationSpeed : float 
+@export var camTiltRotationSpeed : float
+
+#shake variables
+@export_group("camera shake variables")
+var shakeForce : float
+@export var shakeDuration : float
+var shakeDurationRef : float
+@export var shakeFade : float
+var rng = RandomNumberGenerator.new()
+var canCameraShake : bool = false
 
 #input variables
 @export_group("input variables")
 var mouseInput : Vector2 
 @export var mouseInputSpeed : float 
-var playerCharInputDirection : Vector2 
-
-#others variables
-var mouseFree : bool 
+var playCharInputDir : Vector2
 
 #references variables
-@onready var camera = $Camera3D
-@onready var playerChar = get_tree().get_first_node_in_group("PlayerCharacter")
+@onready var camera : Camera3D = $Camera3D
+@onready var playerChar : PlayerCharacter = $".."
+@onready var pauseMenu : CanvasLayer = $"../PauseMenu"
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #set mouse as captured
-	mouseFree = false 
+	
 	lastFOV = baseFOV #get the base FOV at start
+	shakeDurationRef = shakeDuration
 	
 func _unhandled_input(event):
 	#this function manage camera rotation (360 on x axis, blocked at <= -60 and >= 60 on y axis, to not having the character do a complete head turn, which will be kinda weird)
-	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * XAxisSensibility)
-		camera.rotate_x(-event.relative.y * YAxisSensibility)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(maxUpAngleView), deg_to_rad(maxDownAngleView))
-		mouseInput = event.relative #get position of the mouse in a 2D sceen, so save it in a Vector2 
+	if !pauseMenu.pauseMenuEnabled: #can only rotate when the ui is not opened
+		if event is InputEventMouseMotion:
+			rotate_y(-event.relative.x * XAxisSensibility)
+			camera.rotate_x(-event.relative.y * YAxisSensibility)
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(maxUpAngleView), deg_to_rad(maxDownAngleView))
+			mouseInput = event.relative #get position of the mouse in a 2D sceen, so save it in a Vector2 
 		
 func _process(delta):
 	applies(delta)
@@ -73,8 +82,6 @@ func _process(delta):
 	cameraBob(delta)
 	
 	cameraTilt(delta)
-	
-	changeMouseMode()
 	
 	FOVChange(delta) 
 	
@@ -95,11 +102,11 @@ func applies(delta):
 		playerChar.states.CROUCH:
 			#lean the camera
 			position.y = lerp(position.y, 0.715 + crouchCameraDepth, crouchCameraLerpSpeed * delta)
-			rotation.z = lerp(rotation.z, deg_to_rad(6.0), slideCameraLerpSpeed * delta)
+			rotation.z = lerp(rotation.z, deg_to_rad(6.0) * playCharInputDir.x if playCharInputDir.x != 0.0 else deg_to_rad(6.0), slideCameraLerpSpeed * delta)
 		playerChar.states.SLIDE:
 			#lean the camera a bit more
 			position.y = lerp(position.y, 0.715 + slideCameraDepth, crouchCameraLerpSpeed * delta)
-			rotation.z = lerp(rotation.z, deg_to_rad(10.0), slideCameraLerpSpeed * delta)
+			rotation.z = lerp(rotation.z, deg_to_rad(10.0) * playCharInputDir.x if playCharInputDir.x != 0.0 else deg_to_rad(10.0), slideCameraLerpSpeed * delta)
 			
 func cameraBob(delta):
 	#this function manage the bobbing of the camera when the character is moving
@@ -117,21 +124,11 @@ func headbob(time):
 func cameraTilt(delta): 
 	#this function manage the camera tilting when the character is moving on the x axis (left and right)
 	if playerChar.moveDirection != Vector3.ZERO and playerChar.currentState != playerChar.states.CROUCH and playerChar.currentState != playerChar.states.SLIDE: #the camera tilting doesn't apply when the character is not moving, or is crouching or walking  
-		playerCharInputDirection = playerChar.inputDirection #get input direction to know where the character is heading to
+		playCharInputDir = playerChar.inputDirection #get input direction to know where the character is heading to
 		#apply smooth tilt movement
-		if !playerChar.is_on_floor(): rotation.z = lerp(rotation.z, -playerCharInputDirection.x * camTiltRotationValue/1.6, camTiltRotationSpeed * delta)
-		else: rotation.z = lerp(rotation.z, -playerCharInputDirection.x * camTiltRotationValue, camTiltRotationSpeed * delta)
+		if !playerChar.is_on_floor(): rotation.z = lerp(rotation.z, -playCharInputDir.x * camTiltRotationValue/1.6, camTiltRotationSpeed * delta)
+		else: rotation.z = lerp(rotation.z, -playCharInputDir.x * camTiltRotationValue, camTiltRotationSpeed * delta)
 		
-func changeMouseMode():
-	#this function manage the mouse state
-	#when the mouse is captured, you can't see it, and she's disable (not for the movement detection, but for the on screen inputs)
-	#when the mouse is visible, you can see it, and she's enable
-	if Input.is_action_just_pressed("freeMouse"):
-		mouseFree = !mouseFree
-		
-		if mouseFree: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 func FOVChange(delta):
 	#FOV addon used to keep a logic FOV (for example, FOV when the character jumps right after running should be a bit higher than when he jumps right after walking)
 	if lastFOV == baseFOV: addonFOV = 0
@@ -160,4 +157,3 @@ func FOVChange(delta):
 	#smoothly apply the FOV
 	if playerChar.currentState == playerChar.states.DASH: camera.fov = lerp(camera.fov, targetFOV, fovChangeSpeedWhenDash * delta) #the dash state has it's own get-to-FOV speed, because the action is very quick and so the FOV change won't be seen with the regular get-to-FOV speed
 	else: camera.fov = lerp(camera.fov, targetFOV, fovChangeSpeed * delta)
-		

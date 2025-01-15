@@ -49,7 +49,7 @@ albedo_color = Color(0.12549, 0.568627, 1, 1)
 height = 0.15
 radius = 2.0
 
-[node name="Level3" type="Node3D"]
+[node name="TemplateMap" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -156,7 +156,7 @@ collision_mask = 2
 size = Vector3(14, 1, 140)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.139, 43.868, -60.14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -215.145, 43.895, -60.14)
 material_override = SubResource("StandardMaterial3D_ygjqq")
 use_collision = true
 collision_mask = 2

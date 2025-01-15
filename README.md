@@ -31,16 +31,22 @@ Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYg
  - Crouching
  - Running
  - Jumping (multiple jump system)
+ - Jump buffering
+ - Coyote jump/time
  - Air control
  - Sliding (and air slide)
  - Dashing
  - Bunny hopping
  - Wall running
+ - Grappling hook (pull type)
+ - Knockback
 
  - Camera tilt
  - Camera bob
  - Custom smooth FOV
-   
+
+ - Pause menu
+ - Options menu (keybinding, video, audio)
  - Crosshair
  - Properties HUD
 
