@@ -62,7 +62,8 @@ All keys bindings can be modified
 - C = crouch / slide
 - Left control = dash
 - Escape = pause menu
-- E = Grapple hook
+- Left mouse button = grapple hook
+- Right mouse button = use knockback tool
 
 
 # **Purpose**
