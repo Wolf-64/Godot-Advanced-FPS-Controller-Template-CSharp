@@ -12,7 +12,6 @@ var waitTimeBefCanUseKnobaAgainRef : float
 signal sendKnockback
 
 func _ready():
-	visible = true
 	waitTimeBefCanUseKnobaAgainRef = waitTimeBefCanUseKnobaAgain
 	
 func _process(delta):
