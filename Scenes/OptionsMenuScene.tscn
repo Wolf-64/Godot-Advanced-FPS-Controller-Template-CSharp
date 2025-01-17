@@ -27,9 +27,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Controls" type="MarginContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -142,7 +143,6 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Audio" type="MarginContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -201,7 +201,7 @@ layout_mode = 2
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 1
 
 [node name="MainVolumeSlider" type="HSlider" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 custom_minimum_size = Vector2(300, 0)
@@ -217,7 +217,7 @@ busName = "Master"
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = 2
 
 [node name="MusicVolumeSlider" type="HSlider" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 custom_minimum_size = Vector2(300, 0)
@@ -233,7 +233,7 @@ busName = "Music"
 [node name="HSeparator3" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 19
+theme_override_constants/separation = 4
 
 [node name="SoundVolumeSlider" type="HSlider" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 custom_minimum_size = Vector2(300, 0)

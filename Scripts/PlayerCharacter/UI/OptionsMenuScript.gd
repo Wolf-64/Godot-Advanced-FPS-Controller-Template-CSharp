@@ -23,7 +23,8 @@ var inputActions : Dictionary = {
 	"crouch | slide" : "Crouch | Slide",
 	"dash" : "Dash",
 	"grappleHook" : "Grapple hook",
-	"pauseMenu" : "Pause menu",
+	"useKnockbackTool" : "Knockack tool",
+	"pauseMenu" : "Pause menu"
 }
 
 @export_group("Audio variables")
