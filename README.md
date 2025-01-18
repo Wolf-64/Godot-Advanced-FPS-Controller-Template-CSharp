@@ -21,7 +21,9 @@ The template is 100% written in GDScript.
 He works on Godot 4.3 and Godot 4.2.
 I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
-Video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
+The video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
+
+And the video showcasing the added features of the 2.0 version : https://www.youtube.com/watch?v=3jwx65NFijI
 
 
 # **Features**
