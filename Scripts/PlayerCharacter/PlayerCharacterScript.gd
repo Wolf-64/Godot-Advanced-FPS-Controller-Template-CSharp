@@ -535,8 +535,8 @@ func jump(jumpBoostValue : float, isJumpBoost : bool):
 	#this function manage the jump behaviour, depending of the different variables and states the character is
 	
 	var canJump : bool = false #jump condition
-	
-	#le saut ne peut être effectué que si le personnage est pull vers le haut
+
+        #the jump can only be applied if the player character is pulled up
 	if currentState == states.GRAPPLE and lastFramePosition.y > position.y and !downDirJump:
 		if jumpBoostValue != 0.0: jumpBoostValue = 0.0
 		if isJumpBoost: isJumpBoost = false
