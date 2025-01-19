@@ -224,7 +224,7 @@ func inputManagement():
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
 					jumpBuffering()
-				
+					
 				if Input.is_action_just_pressed("crouch | slide"):
 					slideStateChanges()
 				
@@ -535,8 +535,8 @@ func jump(jumpBoostValue : float, isJumpBoost : bool):
 	#this function manage the jump behaviour, depending of the different variables and states the character is
 	
 	var canJump : bool = false #jump condition
-
-        #the jump can only be applied if the player character is pulled up
+	
+	#the jump can only be applied if the player character is pulled up
 	if currentState == states.GRAPPLE and lastFramePosition.y > position.y and !downDirJump:
 		if jumpBoostValue != 0.0: jumpBoostValue = 0.0
 		if isJumpBoost: isJumpBoost = false
