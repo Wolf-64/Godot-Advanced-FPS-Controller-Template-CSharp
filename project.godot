@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Advanced FPS controller template - v2"
+config/name="Advanced FPS controller template"
 run/main_scene="res://Scenes/TemplateMapScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Arts/TemplateImages/Icon.png"
