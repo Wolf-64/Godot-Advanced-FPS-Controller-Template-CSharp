@@ -76,8 +76,6 @@ My main goal with this project was to provide a complete and easy to manage/modi
 
 I hope that it will be the case.
 
-I didn't found any bug during the last tests, but i probably missed out a few, so if you find out a bug, feel free to tell me in response to my comment in the showcase video.
-
 
 # **How to use**
 
@@ -85,5 +83,12 @@ I didn't found any bug during the last tests, but i probably missed out a few, s
 This plugin is a template, which means it's a project that has been designed to be a base of a new project, not an addon to an existing one.
 
 So to correctly use it, you simply have to download it, and then import the project on the Godot app welcome page, and that's all !
+
+
+# **Requets**
+
+For any bug request, please write on down in the "issues" section.
+
+For any new feature/improvement request, please write it down in the "discussions" section.
  
  
