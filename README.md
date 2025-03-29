@@ -90,5 +90,10 @@ So to correctly use it, you simply have to download it, and then import the proj
 For any bug request, please write on down in the "issues" section.
 
 For any new feature/improvement request, please write it down in the "discussions" section.
+
+
+# **Credits**
+
+Kenney Prototype Textures, by Kenny, reworked for Godot by Calinou : https://godotengine.org/asset-library/asset/781
  
  
