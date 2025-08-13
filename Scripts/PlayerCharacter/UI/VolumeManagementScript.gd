@@ -9,8 +9,8 @@ func _ready():
 	
 	value = db_to_linear(AudioServer.get_bus_volume_db(busIndex)) #convert decibels to linear (for stockage purpose)
 	
-func volumeValueChange(value : float):
-	AudioServer.set_bus_volume_db(busIndex, linear_to_db(value)) #set the volume of the audio bus selected by the bus index
+func volumeValueChange(soundValue : float):
+	AudioServer.set_bus_volume_db(busIndex, linear_to_db(soundValue)) #set the volume of the audio bus selected by the bus index
 	
 	
 	
