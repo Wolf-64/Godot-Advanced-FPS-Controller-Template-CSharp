@@ -56,7 +56,7 @@ public partial class HUD: Control
 	}
 
 	// this function manage the current state displayment
-	public void displayCurrentState(PlayerCharacter.State currentState)
+	public void DisplayCurrentState(PlayerCharacter.State currentState)
 	{
 		// set the state name to display according to the parameter value
 		currentStateLabelText.Text = Enum.GetName(currentState);
@@ -65,58 +65,58 @@ public partial class HUD: Control
 	/// <summary>
 	/// This function manages the move speed display
 	/// </summary>
-	public void displayMoveSpeed(float moveSpeed)
+	public void DisplayMoveSpeed(float moveSpeed)
 	{
 		moveSpeedLabelText.Text = moveSpeed.ToString();
 	}
 
-	public void displayDesiredMoveSpeed(float desiredMoveSpeed)
+	public void DisplayDesiredMoveSpeed(float desiredMoveSpeed)
 	{
 		// this function manage the desired move speed displayment
 		desiredMoveSpeedLabelText.Text = desiredMoveSpeed.ToString();
 	}
-	public void displayVelocity(float velocity)
+	public void DisplayVelocity(float velocity)
 	{
 		// this function manage the current velocity displayment
 		velocityLabelText.Text = velocity.ToString();
 	}
 
-	public void displayNbJumpsAllowedInAir(int nbJumpsAllowedInAir)
+	public void DisplayNbJumpsAllowedInAir(int nbJumpsAllowedInAir)
 	{
 		// this function manage the nb jumps allowed left displayment
 		nbJumpsAllowedInAirLabelText.Text = nbJumpsAllowedInAir.ToString();
 	}
 
-	public void displayNbDashsAllowed(int nbDashsAllowed)
+	public void DisplayNbDashsAllowed(int nbDashsAllowed)
 	{
 		// this function manage the nb dashs allowed left displayment
 		nbDashsAllowedLabelText.Text = nbDashsAllowed.ToString();
 	}
 
-	public void displaySlideWaitTime(double slideWaitTime)
+	public void DisplaySlideWaitTime(double slideWaitTime)
 	{
 		slideWaitTimeLabelText.Text = slideWaitTime.ToString();
 	}
 
 
-	public void displayDashWaitTime(double dashWaitTime)
+	public void DisplayDashWaitTime(double dashWaitTime)
 	{
 		dashWaitTimeLabelText.Text = dashWaitTime.ToString();
 	}
 
-	public void displayKnockbackToolWaitTime(double timeBefCanUseAgain)
+	public void DisplayKnockbackToolWaitTime(double timeBefCanUseAgain)
 	{
 		// this function manage the knockback tool time left displayment
 		knockbackToolWaitTimeLabelText.Text = timeBefCanUseAgain.ToString();
 	}
 
-	public void displayGrappleHookToolWaitTime(double timeBefCanUseAgain)
+	public void DisplayGrappleHookToolWaitTime(double timeBefCanUseAgain)
 	{
 		// this function manage the grapple hook time left displayment
 		grappleToolWaitTimeLabelText.Text = timeBefCanUseAgain.ToString();
 	}
 
-	public void displaySpeedLinesAsync(double dashTime)
+	public void DisplaySpeedLinesAsync(double dashTime)
 	{
 		// this function manages the speed lines displayment (only when the character is dashing)
 		speedLinesContainer.Visible = true;

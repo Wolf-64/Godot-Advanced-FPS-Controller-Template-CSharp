@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=28 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacter.cs" id="1_pwr00"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraObject.cs" id="2_r0dou"]
@@ -13,11 +13,6 @@
 max_value = 100.0
 _data = [Vector2(0.170385, 17.0943), 0.0, 0.0, 0, 0, Vector2(0.306288, 32.3019), 0.0, 0.0, 0, 0, Vector2(0.553753, 59.283), 0.0, 0.0, 0, 0, Vector2(0.874239, 99.5094), 0.0, 0.0, 0, 0]
 point_count = 4
-
-[sub_resource type="Curve" id="Curve_1uw7v"]
-max_value = 10.0
-_data = [Vector2(0.247465, 8.82264), 0.0, 0.0, 0, 0, Vector2(0.56998, 7.69434), 0.0, 0.0, 0, 0, Vector2(0.896552, 6.86038), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0b8a"]
 albedo_texture = ExtResource("7_jclwn")
@@ -159,7 +154,6 @@ floor_snap_length = 0.0
 platform_floor_layers = 4294901761
 script = ExtResource("1_pwr00")
 DesiredMoveSpeedCurve = SubResource("Curve_47cxr")
-inAirMoveSpeedCurve = SubResource("Curve_1uw7v")
 
 [node name="CameraHolder" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.540581, 0)
@@ -486,3 +480,5 @@ vertical_alignment = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_3wmtt")]
 visible = false
+
+[connection signal="sendKnockback" from="CameraHolder/Camera3D/ObjectTool" to="." method="OnObjectToolSendKnockback"]

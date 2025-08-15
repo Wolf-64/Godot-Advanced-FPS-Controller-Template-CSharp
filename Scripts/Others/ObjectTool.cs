@@ -5,9 +5,9 @@ public partial class ObjectTool : Node3D
 {
 	[ExportGroup("Knockback variables")]
 	[Export]
-	public float knockbackAmount { get; set; } = 36f;
+	public float KnockbackAmount { get; set; } = 36f;
 	[Export]
-	public float waitTimeBefCanUseKnobaAgain { get; set; } = 0.31f;
+	public float WaitTimeBefCanUseKnobaAgain { get; set; } = 0.31f;
 	float waitTimeBefCanUseKnobaAgainRef;
 
 	// @onready
@@ -26,41 +26,41 @@ public partial class ObjectTool : Node3D
 		knockbackToolAttackPoint = GetNode<Node3D>("KnockbackTool/KnockbackToolAttackPoint");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		hud = GetNode<HUD>("../../../HUD");
-		waitTimeBefCanUseKnobaAgainRef = waitTimeBefCanUseKnobaAgain;
+		waitTimeBefCanUseKnobaAgainRef = WaitTimeBefCanUseKnobaAgain;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		use((float)delta);
-		timeManagement((float)delta);
-		sendProperties();
+		Use((float)delta);
+		TimeManagement((float)delta);
+		SendProperties();
 	}
 
-	public void use(float _delta)
+	public void Use(float _delta)
 	{
 		if (Input.IsActionJustPressed("useKnockbackTool"))
 		{
 			// send a knockback action to the character
-			if (waitTimeBefCanUseKnobaAgain <= 0.0)
+			if (WaitTimeBefCanUseKnobaAgain <= 0.0)
 			{
-				waitTimeBefCanUseKnobaAgain = waitTimeBefCanUseKnobaAgainRef;
+				WaitTimeBefCanUseKnobaAgain = waitTimeBefCanUseKnobaAgainRef;
 
-				EmitSignal(SignalName.sendKnockback, knockbackAmount, -GlobalTransform.Basis.Z.Normalized());
+				EmitSignal(SignalName.sendKnockback, KnockbackAmount, -GlobalTransform.Basis.Z.Normalized());
 				animationPlayer.Play("useKnockbackTool");
 			}
 		}
 	}
 
-	public void timeManagement(float delta)
+	public void TimeManagement(float delta)
 	{
-		if (waitTimeBefCanUseKnobaAgain > 0.0)
-			waitTimeBefCanUseKnobaAgain -= delta;
+		if (WaitTimeBefCanUseKnobaAgain > 0.0)
+			WaitTimeBefCanUseKnobaAgain -= delta;
 	}
 
-	public void sendProperties()
+	public void SendProperties()
 	{
 		// display knockback tool properties
-		hud.displayKnockbackToolWaitTime(waitTimeBefCanUseKnobaAgain);
+		hud.DisplayKnockbackToolWaitTime(WaitTimeBefCanUseKnobaAgain);
 	}
 }

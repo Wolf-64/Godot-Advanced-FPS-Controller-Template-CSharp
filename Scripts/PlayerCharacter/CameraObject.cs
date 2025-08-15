@@ -10,20 +10,20 @@ public partial class CameraObject : Node3D
 	[Export]
 	public float YAxisSensibility { get; set; } = 0.008f;
 	[Export]
-	public float maxUpAngleView { get; set; } = -90f;
+	public float MaxUpAngleView { get; set; } = -90f;
 	[Export]
-	public float maxDownAngleView { get; set; } = 90f;
+	public float MaxDownAngleView { get; set; } = 90f;
 
 	//  movement changes variables
 	[ExportGroup("movement changes variables")]
 	[Export]
-	public float crouchCameraDepth { get; set; } = -0.2f;
+	public float CrouchCameraDepth { get; set; } = -0.2f;
 	[Export]
-	public float crouchCameraLerpSpeed { get; set; } = 8f;
+	public float CrouchCameraLerpSpeed { get; set; } = 8f;
 	[Export]
-	public float slideCameraDepth { get; set; } = -0.5f;
+	public float SlideCameraDepth { get; set; } = -0.5f;
 	[Export]
-	public float slideCameraLerpSpeed { get; set; } = 8f;
+	public float SlideCameraLerpSpeed { get; set; } = 8f;
 
 	//  fov variables
 	[ExportGroup("fov variables")]
@@ -31,44 +31,44 @@ public partial class CameraObject : Node3D
 	float lastFOV;
 	float addonFOV;
 	[Export]
-	public float baseFOV { get; set; } = 90f;
+	public float BaseFOV { get; set; } = 90f;
 	[Export]
-	public float crouchFOV { get; set; } = 75f;
+	public float CrouchFOV { get; set; } = 75f;
 	[Export]
-	public float runFOV { get; set; } = 100f;
+	public float RunFOV { get; set; } = 100f;
 	[Export]
-	public float slideFOV { get; set; } = 120f;
+	public float SlideFOV { get; set; } = 120f;
 	[Export]
-	public float dashFOV { get; set; } = 150f;
+	public float DashFOV { get; set; } = 150f;
 	[Export]
-	public float fovChangeSpeed { get; set; } = 4f;
+	public float FovChangeSpeed { get; set; } = 4f;
 	[Export]
-	public float fovChangeSpeedWhenDash { get; set; } = 3f;
+	public float FovChangeSpeedWhenDash { get; set; } = 3f;
 
 	//  bob variables
 	[ExportGroup("bob variables")]
 	[Export]
-	public float headBobValue { get; set; }
+	public float HeadBobValue { get; set; }
 	[Export]
-	public float bobFrequency { get; set; } = 0.8f;
+	public float BobFrequency { get; set; } = 0.8f;
 	[Export]
-	public float bobAmplitude { get; set; } = 0.06f;
+	public float BobAmplitude { get; set; } = 0.06f;
 
 	//  tilt variables
 	[ExportGroup("tilt variables")]
 	[Export]
-	public float camTiltRotationValue { get; set; } = 0.35f;
+	public float CamTiltRotationValue { get; set; } = 0.35f;
 	[Export]
-	public float camTiltRotationSpeed { get; set; } = 2.2f;
+	public float CamTiltRotationSpeed { get; set; } = 2.2f;
 
 	//  shake variables
 	[ExportGroup("camera shake variables")]
 	float shakeForce;
 	[Export]
-	public float shakeDuration { get; set; } = 0.35f;
+	public float ShakeDuration { get; set; } = 0.35f;
 	float shakeDurationRef;
 	[Export]
-	public float shakeFade { get; set; } = 6f;
+	public float ShakeFade { get; set; } = 6f;
 	RandomNumberGenerator rng = new RandomNumberGenerator();
 	bool canCameraShake = false;
 
@@ -76,7 +76,7 @@ public partial class CameraObject : Node3D
 	[ExportGroup("input variables")]
 	Vector2 mouseInput;
 	[Export]
-	public float mouseInputSpeed { get; set; } = 2f;
+	public float MouseInputSpeed { get; set; } = 2f;
 	Vector2 playCharInputDir;
 
 	//  references variables
@@ -96,22 +96,22 @@ public partial class CameraObject : Node3D
 
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
-		lastFOV = baseFOV;
-		shakeDurationRef = shakeDuration;
+		lastFOV = BaseFOV;
+		shakeDurationRef = ShakeDuration;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		applies((float)delta);
-		cameraBob((float)delta);
-		cameraTilt((float)delta);
+		Applies((float)delta);
+		CameraBob((float)delta);
+		CameraTilt((float)delta);
 		FOVChange((float)delta);
 		lastFOV = targetFOV; // get the last FOV used
 	}
 
 
-	public void applies(float delta)
+	public void Applies(float delta)
 	{
 		// this function manage the differents camera modifications relative to a specific state, except for the FOV
 		float newPosY = 0.0f;
@@ -119,26 +119,26 @@ public partial class CameraObject : Node3D
 		switch (playerChar.currentState)
 		{
 			case PlayerCharacter.State.IDLE:
-				newPosY = Mathf.Lerp(Position.Y, 0.715f, crouchCameraLerpSpeed * delta);
-				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), slideCameraLerpSpeed * delta);
+				newPosY = Mathf.Lerp(Position.Y, 0.715f, CrouchCameraLerpSpeed * delta);
+				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), SlideCameraLerpSpeed * delta);
 				break;
 			case PlayerCharacter.State.WALK:
-				newPosY = Mathf.Lerp(Position.Y, 0.715f, crouchCameraLerpSpeed * delta);
-				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), slideCameraLerpSpeed * delta);
+				newPosY = Mathf.Lerp(Position.Y, 0.715f, CrouchCameraLerpSpeed * delta);
+				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), SlideCameraLerpSpeed * delta);
 				break;
 			case PlayerCharacter.State.RUN:
-				newPosY = Mathf.Lerp(Position.Y, 0.715f, crouchCameraLerpSpeed * delta);
-				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), slideCameraLerpSpeed * delta);
+				newPosY = Mathf.Lerp(Position.Y, 0.715f, CrouchCameraLerpSpeed * delta);
+				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(0.0f), SlideCameraLerpSpeed * delta);
 				break;
 			case PlayerCharacter.State.CROUCH:
 				// lean the camera
-				newPosY = Mathf.Lerp(Position.Y, 0.715f + crouchCameraDepth, crouchCameraLerpSpeed * delta);
-				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(6.0f) * (!Mathf.IsEqualApprox(playCharInputDir.X, 0.0f) ? playCharInputDir.X : Mathf.DegToRad(6.0f)), slideCameraLerpSpeed * delta);
+				newPosY = Mathf.Lerp(Position.Y, 0.715f + CrouchCameraDepth, CrouchCameraLerpSpeed * delta);
+				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(6.0f) * (!Mathf.IsEqualApprox(playCharInputDir.X, 0.0f) ? playCharInputDir.X : Mathf.DegToRad(6.0f)), SlideCameraLerpSpeed * delta);
 				break;
 			case PlayerCharacter.State.SLIDE:
 				// lean the camera a bit more
-				newPosY = Mathf.Lerp(Position.Y, 0.715f + slideCameraDepth, crouchCameraLerpSpeed * delta);
-				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(10.0f) * (!Mathf.IsEqualApprox(playCharInputDir.X, 0.0f) ? playCharInputDir.X : Mathf.DegToRad(10.0f)), slideCameraLerpSpeed * delta);
+				newPosY = Mathf.Lerp(Position.Y, 0.715f + SlideCameraDepth, CrouchCameraLerpSpeed * delta);
+				newRotZ = Mathf.Lerp(Rotation.Z, Mathf.DegToRad(10.0f) * (!Mathf.IsEqualApprox(playCharInputDir.X, 0.0f) ? playCharInputDir.X : Mathf.DegToRad(10.0f)), SlideCameraLerpSpeed * delta);
 				break;
 		}
 
@@ -146,27 +146,27 @@ public partial class CameraObject : Node3D
 		Rotation = new Vector3(Rotation.X, Rotation.Y, newRotZ);
 	}
 
-	public void cameraBob(float delta)
+	public void CameraBob(float delta)
 	{
 		// this function manage the bobbing of the camera when the character is moving
 		if (playerChar.currentState != PlayerCharacter.State.SLIDE && playerChar.currentState != PlayerCharacter.State.DASH)
 		{
 			// the bobbing doesn't apply when the character is sliding or is dashing
-			headBobValue += delta * playerChar.Velocity.Length() * (playerChar.IsOnFloor() ? 1.0f : 0.0f);
+			HeadBobValue += delta * playerChar.Velocity.Length() * (playerChar.IsOnFloor() ? 1.0f : 0.0f);
 	
 			Transform3D transform = new Transform3D();
-			transform.Origin = headbob(headBobValue);
+			transform.Origin = Headbob(HeadBobValue);
 			camera.Transform = transform; // apply the bob effect obtained to the camera
 		}
 	}
 
-	public Vector3 headbob(float time)
+	public Vector3 Headbob(float time)
 	{
 		// some trigonometry stuff here, basically it uses the cosinus and sinus functions (sinusoidal function) to get a nice and smooth bob effect
-		return new Vector3(Mathf.Cos(time * bobFrequency / 2) * bobAmplitude, Mathf.Sin(time * bobFrequency) * bobAmplitude, 0.0f);;
+		return new Vector3(Mathf.Cos(time * BobFrequency / 2) * BobAmplitude, Mathf.Sin(time * BobFrequency) * BobAmplitude, 0.0f);;
 	}
 
-	public void cameraTilt(float delta)
+	public void CameraTilt(float delta)
 	{
 		// this function manage the camera tilting when the character is moving on the x axis (left and right)
 		if (playerChar.moveDirection != Vector3.Zero
@@ -177,54 +177,54 @@ public partial class CameraObject : Node3D
 			playCharInputDir = playerChar.inputDirection; // get input direction to know where the character is heading to
 			// apply smooth tilt movement
 			if (!playerChar.IsOnFloor())
-				Rotation = new Vector3(Rotation.X, Rotation.Y, Mathf.Lerp(Rotation.Z, -playCharInputDir.X * camTiltRotationValue / 1.6f, camTiltRotationSpeed * delta));
+				Rotation = new Vector3(Rotation.X, Rotation.Y, Mathf.Lerp(Rotation.Z, -playCharInputDir.X * CamTiltRotationValue / 1.6f, CamTiltRotationSpeed * delta));
 			else
-				Rotation = new Vector3(Rotation.X, Rotation.Y, Mathf.Lerp(Rotation.Z, -playCharInputDir.X * camTiltRotationValue, camTiltRotationSpeed * delta));
+				Rotation = new Vector3(Rotation.X, Rotation.Y, Mathf.Lerp(Rotation.Z, -playCharInputDir.X * CamTiltRotationValue, CamTiltRotationSpeed * delta));
 		}
 	}
 	public void FOVChange(float delta)
 	{
 		// FOV addon used to keep a logic FOV (for example, FOV when the character jumps right after running should be a bit higher than when he jumps right after walking)
-		if (Mathf.IsEqualApprox(lastFOV, baseFOV))
+		if (Mathf.IsEqualApprox(lastFOV, BaseFOV))
 			addonFOV = 0f;
-		if (Mathf.IsEqualApprox(lastFOV, runFOV))
+		if (Mathf.IsEqualApprox(lastFOV, RunFOV))
 			addonFOV = 10f;
-		if (Mathf.IsEqualApprox(lastFOV, slideFOV))
+		if (Mathf.IsEqualApprox(lastFOV, SlideFOV))
 			addonFOV = 30f;
 
 		// get the corresponding FOV to the current state the character is
 		switch (playerChar.currentState)
 		{
 			case PlayerCharacter.State.IDLE:
-				targetFOV = baseFOV;
+				targetFOV = BaseFOV;
 				break;
 			case PlayerCharacter.State.CROUCH:
-				targetFOV = crouchFOV;
+				targetFOV = CrouchFOV;
 				break;
 			case PlayerCharacter.State.WALK:
-				targetFOV = baseFOV;
+				targetFOV = BaseFOV;
 				break;
 			case PlayerCharacter.State.RUN:
-				targetFOV = runFOV;
+				targetFOV = RunFOV;
 				break;
 			case PlayerCharacter.State.SLIDE:
-				targetFOV = slideFOV;
+				targetFOV = SlideFOV;
 				break;
 			case PlayerCharacter.State.DASH:
-				targetFOV = dashFOV;
+				targetFOV = DashFOV;
 				break;
 			case PlayerCharacter.State.JUMP:
-				targetFOV = baseFOV + addonFOV;
+				targetFOV = BaseFOV + addonFOV;
 				break;
 			case PlayerCharacter.State.INAIR:
-				targetFOV = baseFOV + addonFOV;
+				targetFOV = BaseFOV + addonFOV;
 				break;
 		}
 		
 		// smoothly apply the FOV
 		if (playerChar.currentState == PlayerCharacter.State.DASH)
-			camera.Fov = Mathf.Lerp(camera.Fov, targetFOV, fovChangeSpeedWhenDash * delta); // the dash state has it's own get-to-FOV speed, because the action is very quick and so the FOV change won't be seen with the regular get-to-FOV speed
+			camera.Fov = Mathf.Lerp(camera.Fov, targetFOV, FovChangeSpeedWhenDash * delta); // the dash state has it's own get-to-FOV speed, because the action is very quick and so the FOV change won't be seen with the regular get-to-FOV speed
 		else
-			camera.Fov = Mathf.Lerp(camera.Fov, targetFOV, fovChangeSpeed * delta);
+			camera.Fov = Mathf.Lerp(camera.Fov, targetFOV, FovChangeSpeed * delta);
 	}
 }

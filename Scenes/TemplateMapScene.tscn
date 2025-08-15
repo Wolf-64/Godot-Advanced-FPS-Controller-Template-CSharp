@@ -228,7 +228,6 @@ collision_mask = 2
 radius = 2.0
 height = 0.15
 script = ExtResource("4_idcpb")
-jumpBoostValue = 22.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad"]
 collision_mask = 2
@@ -245,7 +244,6 @@ collision_mask = 2
 radius = 2.0
 height = 0.15
 script = ExtResource("4_idcpb")
-jumpBoostValue = 29.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad3"]
 collision_mask = 2
@@ -262,7 +260,6 @@ collision_mask = 2
 radius = 2.0
 height = 0.15
 script = ExtResource("4_idcpb")
-jumpBoostValue = 34.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad2"]
 collision_mask = 2
@@ -279,7 +276,6 @@ collision_mask = 2
 radius = 2.0
 height = 0.15
 script = ExtResource("4_idcpb")
-jumpBoostValue = 34.0
 
 [node name="Area3D" type="Area3D" parent="Map/Jumppads/Jumppad4"]
 collision_mask = 2

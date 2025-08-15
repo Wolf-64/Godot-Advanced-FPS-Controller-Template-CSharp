@@ -38,32 +38,32 @@ public partial class PlayerCharacter : CharacterBody3D
 	[Export]
 	public float MaxSpeed { get; set; } = 80f;
 	[Export]
-	public float walkSpeed { get; set; } = 11f;
+	public float WalkSpeed { get; set; } = 11f;
 	[Export]
-	public float runSpeed { get; set; } = 20f;
+	public float RunSpeed { get; set; } = 20f;
 	[Export]
-	public float crouchSpeed { get; set; } = 7f;
+	public float CrouchSpeed { get; set; } = 7f;
 	float slideSpeed;
 	[Export]
-	public float slideSpeedAddon { get; set; } = 8f;
+	public float SlideSpeedAddon { get; set; } = 8f;
 	[Export]
-	public float dashSpeed { get; set; } = 130f;
+	public float DashSpeed { get; set; } = 130f;
 	float moveAcceleration;
 	[Export]
-	public float walkAcceleration { get; set; } = 10f;
+	public float WalkAcceleration { get; set; } = 10f;
 	[Export]
-	public float runAcceleration { get; set; } = 8f;
+	public float RunAcceleration { get; set; } = 8f;
 	[Export]
 	public float crouchAcceleration { get; set; } = 6f;
 	float moveDecceleration;
 	[Export]
-	public float walkDecceleration { get; set; } = 10f;
+	public float WalkDecceleration { get; set; } = 10f;
 	[Export]
-	public float runDecceleration { get; set; } = 8f;
+	public float RunDecceleration { get; set; } = 8f;
 	[Export]
-	public float crouchDecceleration { get; set; } = 6f;
+	public float CrouchDecceleration { get; set; } = 6f;
 	[Export]
-	public Curve inAirMoveSpeedCurve;
+	public Curve InAirMoveSpeedCurve;
 
 	[ExportGroup("movement variables")]
 	public Vector2 inputDirection { get; set; }
@@ -72,7 +72,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	/// Amount of time the character keeps its accumulated speed before losing it (while being on ground)
 	/// </summary>
 	[Export]
-	public double hitGroundCooldown { get; set; } = 0.2;
+	public double HitGroundCooldown { get; set; } = 0.2;
 	double hitGroundCooldownRef;
 	Vector3 lastFramePosition;
 	Vector3 floorAngle; // angle of the floor the character is on 
@@ -83,90 +83,90 @@ public partial class PlayerCharacter : CharacterBody3D
 
 	[ExportGroup("jump variables")]
 	[Export]
-	public float jumpHeight { get; set; } = 4f;
+	public float JumpHeight { get; set; } = 4f;
 	[Export]
-	public float jumpTimeToPeak { get; set; } = 0.4f;
+	public float JumpTimeToPeak { get; set; } = 0.4f;
 	[Export]
-	public float jumpTimeToFall { get; set; } = 0.35f;
+	public float JumpTimeToFall { get; set; } = 0.35f;
 	// @onready
 	float jumpVelocity;
 	[Export]
-	public double jumpCooldown { get; set; } = 0.25;
+	public double JumpCooldown { get; set; } = 0.25;
 	double jumpCooldownRef;
 	[Export]
-	public int nbJumpsInAirAllowed { get; set; } = 1;
+	public int JumpsInAirAllowed { get; set; } = 1;
 	int nbJumpsInAirAllowedRef;
 	bool canCoyoteJump { get; set; } = true;
 	[Export]
-	public double coyoteJumpCooldown { get; set; } = 0.3;
+	public double CoyoteJumpCooldown { get; set; } = 0.3;
 	double coyoteJumpCooldownRef;
 	bool coyoteJumpOn = false;
 	bool jumpBuffOn = false;
 
 	[ExportGroup("slide variables")]
 	[Export]
-	public double slideTime { get; set; } = 1.0;
+	public double SlideTime { get; set; } = 1.0;
 	[Export]
-	public double slideTimeRef { get; set; } = 0.0;
+	public double SlideTimeRef { get; set; } = 0.0;
 	Vector2 slideVector = Vector2.Zero; // slide direction
 	bool startSlideInAir;
 	[Export]
-	public double timeBeforeCanSlideAgain { get; set; } = 0.5;
+	public double TimeBeforeCanSlideAgain { get; set; } = 0.5;
 	double timeBeforeCanSlideAgainRef;
 	/// <summary>
 	/// Max angle value where the slide time duration is applied
 	/// </summary>
 	[Export]
-	public float maxSlopeAngle { get; set; } = 10.0f;
+	public float MaxSlopeAngle { get; set; } = 10.0f;
 
 	[ExportGroup("wall run variables")]
 	[Export]
-	public float wallJumpVelocity { get; set; } = 3f;
+	public float WallJumpVelocity { get; set; } = 3f;
 	bool canWallRun;
 
 	[ExportGroup("dash variables")]
 	[Export]
-	public double dashTime { get; set; } = 0.11;
+	public double DashTime { get; set; } = 0.11;
 	double dashTimeRef;
 	[Export]
-	public int nbDashAllowed { get; set; } = 3;
+	public int DashesAllowed { get; set; } = 3;
 	int nbDashAllowedRef;
 	[Export]
-	public double timeBeforeCanDashAgain { get; set; } = 0.2f;
+	public double TimeBeforeCanDashAgain { get; set; } = 0.2f;
 	double timeBeforeCanDashAgainRef { get; set; } = 0.2f;
 	[Export]
-	public double timeBefReloadDash { get; set; } = 0.6;
+	public double TimeBefReloadDash { get; set; } = 0.6;
 	double timeBefReloadDashRef;
 	Vector3 velocityPreDash;
 
 	[ExportGroup("grapple hook variables")]
 	List<string> grapHookType = new List<string>{ "Pull", "Swing" };
 	[Export]
-	public float grapHookMaxDist { get; set; } = 800f;
+	public float GrapHookMaxDist { get; set; } = 800f;
 	[Export]
 	public float grapHookSpeed { get; set; } = 80f;
 	[Export]
-	public float grapHookAccel { get; set; } = 6f;
+	public float GrapHookAccel { get; set; } = 6f;
 	Vector3 anchorPoint;
 	[Export]
-	public float distToStopGrappleOnFloor { get; set; } = 10f;
+	public float DistToStopGrappleOnFloor { get; set; } = 10f;
 	[Export]
-	public float distToStopGrappleIAir { get; set; } = 5f;
+	public float DistToStopGrappleIAir { get; set; } = 5f;
 	[Export]
-	public double timeBeforeCanGrappleAgain { get; set; } = 0.5;
+	public double TimeBeforeCanGrappleAgain { get; set; } = 0.5;
 	double timeBeforeCanGrappleAgainRef;
 	[Export]
-	public float grappleLaunchJumpVelocity { get; set; } = 8f;
+	public float GrappleLaunchJumpVelocity { get; set; } = 8f;
 	/// <summary>
 	/// enable if the character can jump while grappling downhill
 	/// </summary>
 	[Export]
-	public bool downDirJump { get; set; } = true;
+	public bool DownDirJump { get; set; } = true;
 
 	// knockback variables
 	[ExportGroup("Knockback variables")]
 	[Export]
-	float onFloorKnockbackDivider = 3.5f;
+	public float OnFloorKnockbackDivider { get; set; } = 3.5f;
 
 	// gravity variables
 	[ExportGroup("gravity variables")]
@@ -175,7 +175,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	// @onready
 	float fallGravity;
 	[Export]
-	float wallGravityMultiplier = 0.7f;
+	public float WallGravityMultiplier { get; set; } = 0.7f;
 
 	// references variables
 	// @onready
@@ -202,9 +202,9 @@ public partial class PlayerCharacter : CharacterBody3D
 	public override void _Ready()
 	{
 		// onready vars
-		jumpVelocity = 2.0f * jumpHeight / jumpTimeToPeak;
-		jumpGravity = -2.0f * jumpHeight / (jumpTimeToPeak * jumpTimeToPeak);
-		fallGravity = -2.0f * jumpHeight / (jumpTimeToFall * jumpTimeToFall);
+		jumpVelocity = 2.0f * JumpHeight / JumpTimeToPeak;
+		jumpGravity = -2.0f * JumpHeight / (JumpTimeToPeak * JumpTimeToPeak);
+		fallGravity = -2.0f * JumpHeight / (JumpTimeToFall * JumpTimeToFall);
 
 		cameraHolder = GetNode<CameraObject>("CameraHolder");
 		standHitbox = GetNode<CollisionShape3D>("standingHitbox");
@@ -220,23 +220,23 @@ public partial class PlayerCharacter : CharacterBody3D
 		pauseMenu = GetNode<PauseMenu>("PauseMenu");
 
 		// set the start move speed
-		moveSpeed = walkSpeed;
-		moveAcceleration = walkAcceleration;
-		moveDecceleration = walkDecceleration;
+		moveSpeed = WalkSpeed;
+		moveAcceleration = WalkAcceleration;
+		moveDecceleration = WalkDecceleration;
 
 		// set the values refenrencials for the needed variables
 		desiredMoveSpeed = moveSpeed;
-		jumpCooldownRef = jumpCooldown;
-		nbJumpsInAirAllowedRef = nbJumpsInAirAllowed;
-		hitGroundCooldownRef = hitGroundCooldown;
-		coyoteJumpCooldownRef = coyoteJumpCooldown;
-		slideTimeRef = slideTime;
-		dashTimeRef = dashTime;
-		nbDashAllowedRef = nbDashAllowed;
-		timeBeforeCanSlideAgainRef = timeBeforeCanSlideAgain;
-		timeBeforeCanDashAgainRef = timeBeforeCanDashAgain;
-		timeBefReloadDashRef = timeBefReloadDash;
-		timeBeforeCanGrappleAgainRef = timeBeforeCanGrappleAgain;
+		jumpCooldownRef = JumpCooldown;
+		nbJumpsInAirAllowedRef = JumpsInAirAllowed;
+		hitGroundCooldownRef = HitGroundCooldown;
+		coyoteJumpCooldownRef = CoyoteJumpCooldown;
+		SlideTimeRef = SlideTime;
+		dashTimeRef = DashTime;
+		nbDashAllowedRef = DashesAllowed;
+		timeBeforeCanSlideAgainRef = TimeBeforeCanSlideAgain;
+		timeBeforeCanDashAgainRef = TimeBeforeCanDashAgain;
+		timeBefReloadDashRef = TimeBefReloadDash;
+		timeBeforeCanGrappleAgainRef = TimeBeforeCanGrappleAgain;
 		canWallRun = false;
 		canInput = true;
 
@@ -254,7 +254,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		if (!grappleHookCheck.Enabled)
 			grappleHookCheck.Enabled = true;
 
-		grappleHookCheck.TargetPosition = new Vector3(-grapHookMaxDist, 0.0f, 0.0f); // -grapHookMaxDist pour être bien dans la direction du joueur
+		grappleHookCheck.TargetPosition = new Vector3(-GrapHookMaxDist, 0.0f, 0.0f); // -grapHookMaxDist pour être bien dans la direction du joueur
 		if (grapHookRope.Visible)
 			grapHookRope.Visible = false;
 
@@ -265,24 +265,24 @@ public partial class PlayerCharacter : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		// the behaviours that is preferable to check every "visual" frame
-		if (!pauseMenu.pauseMenuEnabled)
+		if (!pauseMenu.PauseMenuEnabled)
 		{
-			inputManagement();
-			displayStats();
+			InputManagement();
+			DisplayStats();
 		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		// the behaviours that is preferable to check every "physics" frame
-		applies(delta);
-		move(delta);
-		grappleHookManagement(delta);
-		collisionHandling();
+		Applies(delta);
+		Move(delta);
+		GrappleHookManagement(delta);
+		CollisionHandling();
 		MoveAndSlide();
 	}
 
-	public void inputManagement()
+	public void InputManagement()
 	{
 		// for each state, check the possibles actions available
 		// This allow to have a good control of the controller behaviour, because you can easely check the actions possibls, 
@@ -295,121 +295,121 @@ public partial class PlayerCharacter : CharacterBody3D
 				case State.IDLE:
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("crouch | slide"))
-						crouchStateChanges();
+						CrouchStateChanges();
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 				case State.WALK:
 					if (Input.IsActionJustPressed("run"))
-						runStateChanges();
+						RunStateChanges();
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("crouch | slide"))
-						crouchStateChanges();
+						CrouchStateChanges();
 					if (Input.IsActionJustPressed("dash"))
-						dashStateChanges();
+						DashStateChanges();
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 				case State.RUN:
 					if (Input.IsActionJustPressed("run"))
-						walkStateChanges();
+						WalkStateChanges();
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("crouch | slide"))
-						slideStateChanges();
+						SlideStateChanges();
 					if (Input.IsActionJustPressed("dash"))
-						dashStateChanges();
+						DashStateChanges();
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 				case State.CROUCH:
 					if (Input.IsActionJustPressed("run") && !ceilingCheck.IsColliding())
-						walkStateChanges();
+						WalkStateChanges();
 					if (Input.IsActionJustPressed("crouch | slide") && !ceilingCheck.IsColliding())
-						walkStateChanges();
+						WalkStateChanges();
 					break;
 				case State.SLIDE:
 					if (Input.IsActionJustPressed("run"))
-						slideStateChanges();
+						SlideStateChanges();
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("crouch | slide"))
-						slideStateChanges();
+						SlideStateChanges();
 					break;
 				case State.JUMP:
 					if (Input.IsActionJustPressed("crouch | slide"))
-						slideStateChanges();
+						SlideStateChanges();
 					if (Input.IsActionJustPressed("dash"))
-						dashStateChanges();
+						DashStateChanges();
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 				case State.INAIR:
 					if (Input.IsActionJustPressed("crouch | slide"))
-						slideStateChanges();
+						SlideStateChanges();
 					if (Input.IsActionJustPressed("dash"))
-						dashStateChanges();
+						DashStateChanges();
 					if (Input.IsActionJustPressed("jump"))
 					{
-						jump(0.0f, false);
-						jumpBuffering();
+						Jump(0.0f, false);
+						JumpBuffering();
 					}
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 				case State.ONWALL:
 					if (Input.IsActionJustPressed("jump"))
-						jump(0.0f, false);
+						Jump(0.0f, false);
 					break;
 				case State.DASH:
 					break;
 				case State.GRAPPLE:
 					if (Input.IsActionJustPressed("jump"))
-						jump(grapHookSpeed / 3, true);
+						Jump(grapHookSpeed / 3, true);
 					if (Input.IsActionJustPressed("grappleHook"))
-						grappleStateChanges();
+						GrappleStateChanges();
 					break;
 			}
 		}
 	}
-	void displayStats()
+	void DisplayStats()
 	{
 		// call the functions in charge of displaying the controller properties
-		hud.displayCurrentState(currentState);
-		hud.displayMoveSpeed(moveSpeed);
-		hud.displayDesiredMoveSpeed(desiredMoveSpeed);
-		hud.displayVelocity(Velocity.Length());
-		hud.displayNbDashsAllowed(nbDashAllowed);
-		hud.displaySlideWaitTime(timeBeforeCanSlideAgain);
-		hud.displayDashWaitTime(timeBeforeCanDashAgain);
-		hud.displayNbJumpsAllowedInAir(nbJumpsInAirAllowed);
-		hud.displayGrappleHookToolWaitTime(timeBeforeCanGrappleAgain);
+		hud.DisplayCurrentState(currentState);
+		hud.DisplayMoveSpeed(moveSpeed);
+		hud.DisplayDesiredMoveSpeed(desiredMoveSpeed);
+		hud.DisplayVelocity(Velocity.Length());
+		hud.DisplayNbDashsAllowed(DashesAllowed);
+		hud.DisplaySlideWaitTime(TimeBeforeCanSlideAgain);
+		hud.DisplayDashWaitTime(TimeBeforeCanDashAgain);
+		hud.DisplayNbJumpsAllowedInAir(JumpsInAirAllowed);
+		hud.DisplayGrappleHookToolWaitTime(TimeBeforeCanGrappleAgain);
 
 		// not a property, but a visual
 		if (currentState == State.DASH)
-			hud.displaySpeedLinesAsync(dashTime);
+			hud.DisplaySpeedLinesAsync(DashTime);
 	}
 
-	void applies(double delta)
+	void Applies(double delta)
 	{
 		// general appliements
 		floorAngle = GetFloorNormal(); // get the angle of the floor
@@ -434,15 +434,15 @@ public partial class PlayerCharacter : CharacterBody3D
 
 			if (currentState == State.SLIDE)
 				if (!startSlideInAir)
-					slideTime = -1; // if the character start slide on the grund, and the jump, the slide is canceled
+					SlideTime = -1; // if the character start slide on the grund, and the jump, the slide is canceled
 
 
 			if (currentState == State.DASH)
 				Velocity = new Vector3(Velocity.X, 0.0f, Velocity.Z); // set the y axis velocity to 0, to allow the character to not be affected by gravity while dashing
-			if (hitGroundCooldown != hitGroundCooldownRef)
-				hitGroundCooldown = hitGroundCooldownRef; // reset the before bunny hopping value
-			if (coyoteJumpCooldown > 0.0)
-				coyoteJumpCooldown -= delta;
+			if (HitGroundCooldown != hitGroundCooldownRef)
+				HitGroundCooldown = hitGroundCooldownRef; // reset the before bunny hopping value
+			if (CoyoteJumpCooldown > 0.0)
+				CoyoteJumpCooldown -= delta;
 		}
 		if (IsOnFloor())
 		{
@@ -454,37 +454,37 @@ public partial class PlayerCharacter : CharacterBody3D
 			if (jumpBuffOn)
 			{
 				jumpBuffOn = false;
-				jump(0.0f, false);
+				Jump(0.0f, false);
 			}
 
-			if (hitGroundCooldown >= 0)
-				hitGroundCooldown -= delta; // disincremente the value each frame, when it's <= 0, the player lose the speed he accumulated while being in the air 
+			if (HitGroundCooldown >= 0)
+				HitGroundCooldown -= delta; // disincremente the value each frame, when it's <= 0, the player lose the speed he accumulated while being in the air 
 
 
-			if (nbJumpsInAirAllowed != nbJumpsInAirAllowedRef)
-				nbJumpsInAirAllowed = nbJumpsInAirAllowedRef; // set the number of jumps possible
+			if (JumpsInAirAllowed != nbJumpsInAirAllowedRef)
+				JumpsInAirAllowed = nbJumpsInAirAllowedRef; // set the number of jumps possible
 
 
-			if (coyoteJumpCooldown != coyoteJumpCooldownRef)
-				coyoteJumpCooldown = coyoteJumpCooldownRef;
+			if (CoyoteJumpCooldown != coyoteJumpCooldownRef)
+				CoyoteJumpCooldown = coyoteJumpCooldownRef;
 
 			// set the move state depending on the move speed, only when the character is moving
 
 			// not the best piece of code i made, but i didn't really saw a more efficient way
 			if (inputDirection != Vector2.Zero && moveDirection != Vector3.Zero)
 			{
-				if (Mathf.IsEqualApprox(moveSpeed, crouchSpeed))
+				if (Mathf.IsEqualApprox(moveSpeed, CrouchSpeed))
 					currentState = State.CROUCH;
-				else if (Mathf.IsEqualApprox(moveSpeed, walkSpeed))
+				else if (Mathf.IsEqualApprox(moveSpeed, WalkSpeed))
 					currentState = State.WALK;
-				else if (Mathf.IsEqualApprox(moveSpeed, runSpeed))
+				else if (Mathf.IsEqualApprox(moveSpeed, RunSpeed))
 					currentState = State.RUN;
 				else if (Mathf.IsEqualApprox(moveSpeed, slideSpeed))
 					currentState = State.SLIDE;
-				else if (Mathf.IsEqualApprox(moveSpeed, dashSpeed))
+				else if (Mathf.IsEqualApprox(moveSpeed, DashSpeed))
 					currentState = State.DASH;
 				else if (Mathf.IsEqualApprox(moveSpeed, grapHookSpeed))
-					moveSpeed = runSpeed;
+					moveSpeed = RunSpeed;
 			}
 			else
 			{
@@ -505,7 +505,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		// if the character is on a wall
 		// set the state on onwall
 		if (IsOnWall())
-			wallrunStateChanges();
+			WallrunStateChanges();
 
 
 		if (IsOnFloor() || !IsOnFloor())
@@ -520,22 +520,22 @@ public partial class PlayerCharacter : CharacterBody3D
 				// if you know how to resolve that issue, don't hesitate to make a post about it on the discussions tab of the project's Github repository
 
 				if (!startSlideInAir && lastFramePosition.Y + 0.1 < Position.Y) // don't know why i need to add a +0.1 to lastFramePosition.y, otherwise it breaks the mechanic some times
-					slideTime = -1;
+					SlideTime = -1;
 
 
-				if (!startSlideInAir && slopeAngle < maxSlopeAngle)
-					if (slideTime > 0)
-						slideTime -= delta;
+				if (!startSlideInAir && slopeAngle < MaxSlopeAngle)
+					if (SlideTime > 0)
+						SlideTime -= delta;
 
 
-				if (slideTime <= 0)
+				if (SlideTime <= 0)
 				{
-					timeBeforeCanSlideAgain = timeBeforeCanSlideAgainRef;
+					TimeBeforeCanSlideAgain = timeBeforeCanSlideAgainRef;
 					// go to crouch state if the ceiling is too low, otherwise go to run state 
 					if (ceilingCheck.IsColliding())
-						crouchStateChanges();
+						CrouchStateChanges();
 					else
-						runStateChanges();
+						RunStateChanges();
 				}
 			}
 			// manage the dash behaviour
@@ -544,38 +544,38 @@ public partial class PlayerCharacter : CharacterBody3D
 				if (canInput)
 					canInput = false; // the character cannot change direction while dashing 
 
-				if (dashTime > 0)
-					dashTime -= delta;
+				if (DashTime > 0)
+					DashTime -= delta;
 
 				// the character cannot dash anymore, change to corresponding variables, and go back to run state
-				if (dashTime <= 0)
+				if (DashTime <= 0)
 				{
 					Velocity = velocityPreDash; // go back to pre dash velocity
 					canInput = true;
-					timeBeforeCanDashAgain = timeBeforeCanDashAgainRef;
-					runStateChanges();
+					TimeBeforeCanDashAgain = timeBeforeCanDashAgainRef;
+					RunStateChanges();
 				}
 			}
 
-			if (timeBeforeCanSlideAgain > 0.0)
-				timeBeforeCanSlideAgain -= delta;
+			if (TimeBeforeCanSlideAgain > 0.0)
+				TimeBeforeCanSlideAgain -= delta;
 
 
-			if (timeBeforeCanDashAgain > 0.0)
-				timeBeforeCanDashAgain -= delta;
+			if (TimeBeforeCanDashAgain > 0.0)
+				TimeBeforeCanDashAgain -= delta;
 
 			// manage the dash reloading
-			if (timeBefReloadDash > 0.0 && nbDashAllowed != nbDashAllowedRef)
-				timeBefReloadDash -= delta;
+			if (TimeBefReloadDash > 0.0 && DashesAllowed != nbDashAllowedRef)
+				TimeBefReloadDash -= delta;
 
-			if (timeBefReloadDash <= 0.0 && nbDashAllowed != nbDashAllowedRef)
+			if (TimeBefReloadDash <= 0.0 && DashesAllowed != nbDashAllowedRef)
 			{
-				timeBefReloadDash = timeBefReloadDashRef;
-				nbDashAllowed += 1;
+				TimeBefReloadDash = timeBefReloadDashRef;
+				DashesAllowed += 1;
 			}
 
-			if (timeBeforeCanGrappleAgain > 0.0)
-				timeBeforeCanGrappleAgain -= delta;
+			if (TimeBeforeCanGrappleAgain > 0.0)
+				TimeBeforeCanGrappleAgain -= delta;
 
 
 			if (currentState == State.JUMP)
@@ -586,12 +586,12 @@ public partial class PlayerCharacter : CharacterBody3D
 				FloorSnapLength = 2.5f; // but he can if he stopped jumping, but he's still in the air
 
 
-			if (jumpCooldown > 0.0)
-				jumpCooldown -= delta;
+			if (JumpCooldown > 0.0)
+				JumpCooldown -= delta;
 		}
 	}
 
-	void move(double delta)
+	void Move(double delta)
 	{
 		// direction input
 		inputDirection = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
@@ -629,7 +629,7 @@ public partial class PlayerCharacter : CharacterBody3D
 				// apply slide move
 				if (currentState == State.SLIDE)
 				{
-					if (slopeAngle > maxSlopeAngle)
+					if (slopeAngle > MaxSlopeAngle)
 						desiredMoveSpeed += (float)(3.0 * delta); // increase more significantly desired move speed if the slope is steep enough
 					else
 						desiredMoveSpeed += (float)(2.0 * delta);
@@ -639,7 +639,7 @@ public partial class PlayerCharacter : CharacterBody3D
 				// apply dash move
 				else if (currentState == State.DASH)
 				{
-					Velocity = new Vector3(moveDirection.X * dashSpeed, Velocity.Y, moveDirection.Z * dashSpeed);
+					Velocity = new Vector3(moveDirection.X * DashSpeed, Velocity.Y, moveDirection.Z * DashSpeed);
 				}
 				// apply grapple hook desired move speed incrementation
 				else if (currentState == State.GRAPPLE)
@@ -657,7 +657,7 @@ public partial class PlayerCharacter : CharacterBody3D
 					);
 
 					// cancel desired move speed accumulation if the timer is out
-					if (hitGroundCooldown <= 0)
+					if (HitGroundCooldown <= 0)
 						desiredMoveSpeed = Velocity.Length();
 				}
 			}
@@ -683,7 +683,7 @@ public partial class PlayerCharacter : CharacterBody3D
 				// apply dash move
 				if (currentState == State.DASH)
 				{
-					Velocity = new Vector3(moveDirection.X * dashSpeed, Velocity.Y, moveDirection.Z * dashSpeed);
+					Velocity = new Vector3(moveDirection.X * DashSpeed, Velocity.Y, moveDirection.Z * DashSpeed);
 				}
 				// apply slide move
 				else if (currentState == State.SLIDE)
@@ -705,7 +705,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
 					// here, set the air control amount depending on a custom curve, to select it with precision, depending on the desired move speed
 					float contrdDesMoveSpeed = DesiredMoveSpeedCurve.Sample(desiredMoveSpeed / 100);
-					float contrdInAirMoveSpeed = inAirMoveSpeedCurve.Sample(desiredMoveSpeed);
+					float contrdInAirMoveSpeed = InAirMoveSpeedCurve.Sample(desiredMoveSpeed);
 
 					Velocity = new Vector3(
 						(float)Mathf.Lerp(Velocity.X, moveDirection.X * contrdDesMoveSpeed, contrdInAirMoveSpeed * delta),
@@ -739,48 +739,48 @@ public partial class PlayerCharacter : CharacterBody3D
 		wasOnFloor = !IsOnFloor();
 	}
 
-	public void jump(float jumpBoostValue, bool isJumpBoost)
+	public void Jump(float jumpBoostValue, bool isJumpBoost)
 	{
 		// this function manage the jump behaviour, depending of the different variables and states the character is
 
 		bool canJump = false; // jump condition
 
 		// the jump can only be applied if the player character is pulled up
-		if (currentState == State.GRAPPLE && lastFramePosition.Y > Position.Y && !downDirJump)
+		if (currentState == State.GRAPPLE && lastFramePosition.Y > Position.Y && !DownDirJump)
 		{
 			if (!Mathf.IsEqualApprox(jumpBoostValue, 0.0f))
 				jumpBoostValue = 0.0f;
 			if (isJumpBoost)
 				isJumpBoost = false;
-			grappleStateChanges();
+			GrappleStateChanges();
 			return;
 		}
 		// on wall jump 
 		if (IsOnWall() && canWallRun)
 		{
 			currentState = State.JUMP;
-			Velocity = GetWallNormal() * wallJumpVelocity; // add some knockback in the opposite direction of the wall
+			Velocity = GetWallNormal() * WallJumpVelocity; // add some knockback in the opposite direction of the wall
 			Velocity = new Vector3(Velocity.X, jumpVelocity, Velocity.Z);
-			jumpCooldown = jumpCooldownRef;
+			JumpCooldown = jumpCooldownRef;
 		}
 		else
 		{
 			// in air jump
 			if (!IsOnFloor())
 			{
-				if (jumpCooldown <= 0)
+				if (JumpCooldown <= 0)
 				{
 					// determine if the character are in the conditions for enable coyote jump
-					if (wasOnFloor && coyoteJumpCooldown > 0.0 && lastFramePosition.Y > Position.Y)
+					if (wasOnFloor && CoyoteJumpCooldown > 0.0 && lastFramePosition.Y > Position.Y)
 						coyoteJumpOn = true;
 
 					// if the character jump from a jumppad, the jump isn't taken into account in the max numbers of jumps allowed, allowing the character to continusly jump as long as it lands on a jumppad
-					if (nbJumpsInAirAllowed > 0 || (nbJumpsInAirAllowed <= 0 && isJumpBoost) || coyoteJumpOn)
+					if (JumpsInAirAllowed > 0 || (JumpsInAirAllowed <= 0 && isJumpBoost) || coyoteJumpOn)
 					{  // also, take into account if the character is coyote jumping
 						if (!isJumpBoost && !coyoteJumpOn)
-							nbJumpsInAirAllowed -= 1;
+							JumpsInAirAllowed -= 1;
 
-						jumpCooldown = jumpCooldownRef;
+						JumpCooldown = jumpCooldownRef;
 					}
 					coyoteJumpOn = false;
 					canJump = true;
@@ -789,7 +789,7 @@ public partial class PlayerCharacter : CharacterBody3D
 			// on floor jump
 			else
 			{
-				jumpCooldown = jumpCooldownRef;
+				JumpCooldown = jumpCooldownRef;
 				canJump = true;
 			}
 		}
@@ -797,31 +797,31 @@ public partial class PlayerCharacter : CharacterBody3D
 		if (canJump)
 		{
 			if (isJumpBoost)
-			 	nbJumpsInAirAllowed = nbJumpsInAirAllowedRef;
+			 	JumpsInAirAllowed = nbJumpsInAirAllowedRef;
 			currentState = State.JUMP;
 			Velocity = new Vector3(Velocity.X, jumpVelocity + jumpBoostValue, Velocity.Z); // apply directly jump velocity to y axis velocity, to give the character instant vertical forcez
 			canJump = false;
 		}
 	}
 
-	void jumpBuffering()
+	void JumpBuffering()
 	{
 		// if the character is falling, and the floor check raycast is colliding and the jump properties are good, enable jump buffering
 		if (floorCheck.IsColliding()
 				&& lastFramePosition.Y > Position.Y
-				&& nbJumpsInAirAllowed <= 0
-				&& jumpCooldown <= 0.0)
+				&& JumpsInAirAllowed <= 0
+				&& JumpCooldown <= 0.0)
 			jumpBuffOn = true;
 	}
 
-	void grappleHookManagement(double delta)
+	void GrappleHookManagement(double delta)
 	{
 		float distToAnchorPoint = 0.0f; // distance entre le personnae et le point d'ancrage du grappin
-		grappleHookMove(delta, distToAnchorPoint);
-		grappleHookRopeManagement(distToAnchorPoint);
+		GrappleHookMove(delta, distToAnchorPoint);
+		GrappleHookRopeManagement(distToAnchorPoint);
 	}
 
-	void grappleHookMove(double delta, float distToAnchorPoint)
+	void GrappleHookMove(double delta, float distToAnchorPoint)
 	{
 		if (currentState == State.GRAPPLE)
 		{
@@ -832,24 +832,24 @@ public partial class PlayerCharacter : CharacterBody3D
 				// apply grapple hook move
 				if (IsOnFloor())
 				{
-					if (distToAnchorPoint > distToStopGrappleIAir)
-						Velocity = Velocity.Lerp(moveDirection * grapHookSpeed, (float)(grapHookAccel * delta));
+					if (distToAnchorPoint > DistToStopGrappleIAir)
+						Velocity = Velocity.Lerp(moveDirection * grapHookSpeed, (float)(GrapHookAccel * delta));
 					else
-						grappleStateChanges();
+						GrappleStateChanges();
 				}
 				if (!IsOnFloor())
 				{
-					if (distToAnchorPoint > distToStopGrappleOnFloor)
-						Velocity = Velocity.Lerp(moveDirection * grapHookSpeed, (float)(grapHookAccel * delta));
+					if (distToAnchorPoint > DistToStopGrappleOnFloor)
+						Velocity = Velocity.Lerp(moveDirection * grapHookSpeed, (float)(GrapHookAccel * delta));
 					else
-						grappleStateChanges();
+						GrappleStateChanges();
 				}
 			}
 		
 		}
 	}
 
-	void grappleHookRopeManagement(float distToAnchorPoint)
+	void GrappleHookRopeManagement(float distToAnchorPoint)
 	{
 		// hide the rope
 		if (currentState != State.GRAPPLE)
@@ -871,12 +871,12 @@ public partial class PlayerCharacter : CharacterBody3D
 	}
 			
 	// theses functions manages the differents changes and appliments the character will go trought when changing his current state
-	void crouchStateChanges()
+	void CrouchStateChanges()
 	{
 		currentState = State.CROUCH;
-		moveSpeed = crouchSpeed;
+		moveSpeed = CrouchSpeed;
 		moveAcceleration = crouchAcceleration;
-		moveDecceleration = crouchDecceleration;
+		moveDecceleration = CrouchDecceleration;
 
 		standHitbox.Disabled = true;
 		crouchHitbox.Disabled = false;
@@ -888,12 +888,12 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void walkStateChanges()
+	void WalkStateChanges()
 	{
 		currentState = State.WALK;
-		moveSpeed = walkSpeed;
-		moveAcceleration = walkAcceleration;
-		moveDecceleration = walkDecceleration;
+		moveSpeed = WalkSpeed;
+		moveAcceleration = WalkAcceleration;
+		moveDecceleration = WalkDecceleration;
 
 		standHitbox.Disabled = false;
 		crouchHitbox.Disabled = true;
@@ -905,12 +905,12 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void runStateChanges()
+	void RunStateChanges()
 	{
 		currentState = State.RUN;
-		moveSpeed = runSpeed;
-		moveAcceleration = runAcceleration;
-		moveDecceleration = runDecceleration;
+		moveSpeed = RunSpeed;
+		moveAcceleration = RunAcceleration;
+		moveDecceleration = RunDecceleration;
 
 		standHitbox.Disabled = false;
 		crouchHitbox.Disabled = true;
@@ -922,26 +922,26 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void slideStateChanges()
+	void SlideStateChanges()
 	{
 		// condition here, the state is changed only if the character is moving (so has an input direction)
-		if (timeBeforeCanSlideAgain <= 0 && currentState != State.SLIDE)
+		if (TimeBeforeCanSlideAgain <= 0 && currentState != State.SLIDE)
 		{
 			currentState = State.SLIDE;
 
 			// change the start slide in air variable depending zon where the slide begun
-			if (!IsOnFloor() && slideTime <= 0)
+			if (!IsOnFloor() && SlideTime <= 0)
 			{
 				startSlideInAir = true;
 			}
 			else if (IsOnFloor() && lastFramePosition.Y >= Position.Y)
 			{
 				// character can slide only on flat or downhill surfaces: 
-				desiredMoveSpeed += slideSpeedAddon; // slide speed boost when on ground (for balance purpose)
+				desiredMoveSpeed += SlideSpeedAddon; // slide speed boost when on ground (for balance purpose)
 				startSlideInAir = false;
 			}
 
-			slideTime = slideTimeRef;
+			SlideTime = SlideTimeRef;
 			moveSpeed = slideSpeed;
 			if (inputDirection != Vector2.Zero)
 				slideVector = inputDirection;
@@ -959,24 +959,24 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 		else if (currentState == State.SLIDE)
 		{
-			slideTime = -1.0;
-			timeBeforeCanSlideAgain = timeBeforeCanSlideAgainRef;
+			SlideTime = -1.0;
+			TimeBeforeCanSlideAgain = timeBeforeCanSlideAgainRef;
 			if (ceilingCheck.IsColliding())
-				crouchStateChanges();
+				CrouchStateChanges();
 			else
-				runStateChanges();
+				RunStateChanges();
 		}
 	}
 
-	void dashStateChanges()
+	void DashStateChanges()
 	{
 		// condition here, the state is changed only if the character is moving (so has an input direction)
-		if (inputDirection != Vector2.Zero && timeBeforeCanDashAgain <= 0.0 && nbDashAllowed > 0)
+		if (inputDirection != Vector2.Zero && TimeBeforeCanDashAgain <= 0.0 && DashesAllowed > 0)
 		{
 			currentState = State.DASH;
-			nbDashAllowed -= 1;
-			moveSpeed = dashSpeed;
-			dashTime = dashTimeRef;
+			DashesAllowed -= 1;
+			moveSpeed = DashSpeed;
+			DashTime = dashTimeRef;
 			velocityPreDash = Velocity; // save the pre dash velocity, to apply it when the dash is finished (to get back to a normal velocity)
 
 			if (!Mathf.IsEqualApprox(mesh.Scale.Y, 1.0))
@@ -987,17 +987,17 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void wallrunStateChanges()
+	void WallrunStateChanges()
 	{
 		// condition here, the state is changed only if the character speed is greater than the walk speed
-		if (Velocity.Length() > walkSpeed && currentState != State.DASH && currentState != State.CROUCH && canWallRun)
+		if (Velocity.Length() > WalkSpeed && currentState != State.DASH && currentState != State.CROUCH && canWallRun)
 		{
 			currentState = State.ONWALL;
-			Velocity = new Vector3(Velocity.X, Velocity.Y * wallGravityMultiplier, Velocity.Z); // gravity value became onwall one
+			Velocity = new Vector3(Velocity.X, Velocity.Y * WallGravityMultiplier, Velocity.Z); // gravity value became onwall one
 
 
-			if (nbJumpsInAirAllowed != nbJumpsInAirAllowedRef)
-				nbJumpsInAirAllowed = nbJumpsInAirAllowedRef;
+			if (JumpsInAirAllowed != nbJumpsInAirAllowedRef)
+				JumpsInAirAllowed = nbJumpsInAirAllowedRef;
 
 			standHitbox.Disabled = false;
 			crouchHitbox.Disabled = true;
@@ -1010,19 +1010,19 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void grappleStateChanges()
+	void GrappleStateChanges()
 	{
 		// condition here, the state is changed only if the character isn't already grappling, and the grapple check is colliding
-		if (grappleHookCheck.IsColliding() && timeBeforeCanGrappleAgain <= 0.0 && currentState != State.GRAPPLE)
+		if (grappleHookCheck.IsColliding() && TimeBeforeCanGrappleAgain <= 0.0 && currentState != State.GRAPPLE)
 		{
 			currentState = State.GRAPPLE;
 
 			if (IsOnFloor())
-				Velocity = new Vector3(Velocity.X, grappleLaunchJumpVelocity, Velocity.Z);
+				Velocity = new Vector3(Velocity.X, GrappleLaunchJumpVelocity, Velocity.Z);
 
-			timeBeforeCanGrappleAgain = timeBeforeCanGrappleAgainRef;
-			if (nbJumpsInAirAllowed < nbJumpsInAirAllowedRef)
-				nbJumpsInAirAllowed = nbJumpsInAirAllowedRef;
+			TimeBeforeCanGrappleAgain = timeBeforeCanGrappleAgainRef;
+			if (JumpsInAirAllowed < nbJumpsInAirAllowedRef)
+				JumpsInAirAllowed = nbJumpsInAirAllowedRef;
 
 			moveSpeed = grapHookSpeed;
 
@@ -1051,7 +1051,7 @@ public partial class PlayerCharacter : CharacterBody3D
 		}
 	}
 
-	void collisionHandling()
+	void CollisionHandling()
 	{
 		// this function handle the collisions, but in this case, only the collision with a wall, to detect if the character can wallrun
 		if (IsOnWall())
@@ -1073,9 +1073,9 @@ public partial class PlayerCharacter : CharacterBody3D
 	}
 
 	// this function handle the knockback mechanic
-	void _on_object_tool_send_knockback(float knockbackAmount, Vector3 knockbackOrientation)
+	void OnObjectToolSendKnockback(float knockbackAmount, Vector3 knockbackOrientation)
 	{
 		Vector3 knockbackForce = -knockbackOrientation * knockbackAmount; // opposite of the knockback tool orientation, times knockback amount
-		Velocity += !IsOnFloor() ? knockbackForce : knockbackForce / onFloorKnockbackDivider;
+		Velocity += !IsOnFloor() ? knockbackForce : knockbackForce / OnFloorKnockbackDivider;
 	}
 }

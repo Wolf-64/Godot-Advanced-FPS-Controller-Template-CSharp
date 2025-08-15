@@ -9,9 +9,9 @@ public partial class OptionsMenu : CanvasLayer
 	PackedScene inputKeybindBox;
 	// @onready 
 	VBoxContainer inputList;
-	public bool isRemapping { get; set; } = false;
-	public string actionToRemap { get; set; } = null;
-	public Button remappingButton { get; set; } = null;
+	public bool IsRemapping { get; set; } = false;
+	public string ActionToRemap { get; set; } = null;
+	public Button RemappingButton { get; set; } = null;
 
 	[ExportGroup("Video variables")]
 	bool fullscreeenOn = false;
@@ -40,9 +40,9 @@ public partial class OptionsMenu : CanvasLayer
 
 	[ExportGroup("Parent variables")]
 	[Export]
-	PauseMenu pauseMenu;
+	public PauseMenu pauseMenu { get; set; }
 
-	public bool optionsMenuEnabled { get; set; } = false;
+	public bool OptionsMenuEnabled { get; set; } = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -50,6 +50,8 @@ public partial class OptionsMenu : CanvasLayer
 		inputKeybindBox = ResourceLoader.Load<PackedScene>("res://Scenes/InputKeybindOptionScene.tscn");
 		inputList = GetNode<VBoxContainer>("TabContainer/Controls/Control/ScrollContainer/InputList");
 		resolOptionsButton = GetNode<OptionButton>("TabContainer/Video/CenterContainer/VBoxContainer/ResolutionOption/OptionButton");
+
+		SetOptionsMenu(false);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,16 +59,16 @@ public partial class OptionsMenu : CanvasLayer
 	{
 	}
 
-	public void setOptionsMenu(bool value)
+	public void SetOptionsMenu(bool value)
 	{
 		// set the options penu behaviour
 		Visible = value;
-		optionsMenuEnabled = value;
+		OptionsMenuEnabled = value;
 	}
 
 	// -------------------------------- Input part ----------------------------------
 	// this function handle the inputs list creation
-	public void createInputsList()
+	public void CreateInputsList()
 	{
 		InputMap.LoadFromProjectSettings(); // load the inputs set in the project settings
 
@@ -93,7 +95,7 @@ public partial class OptionsMenu : CanvasLayer
 				inputButton.Text = "";
 
 			inputList.AddChild(inputBox);
-			inputButton.Pressed += () => _on_input_button_pressed(inputButton, action); // connect button pressed signal to "on_input_button_pressed" function
+			inputButton.Pressed += () => OnInputButtonPressed(inputButton, action); // connect button pressed signal to "on_input_button_pressed" function
 
 			// create and initialize a separator to add between each instance of inputBox
 			HSeparator horSepar = new HSeparator();
@@ -104,14 +106,14 @@ public partial class OptionsMenu : CanvasLayer
 		}
 	}
 
-	public void _on_input_button_pressed(Button inputButton, string action)
+	public void OnInputButtonPressed(Button inputButton, string action)
 	{
 		// select properties to modify, and so call the keybinding function (which is in the inputBox script)
-		if (!isRemapping)
+		if (!IsRemapping)
 		{
-			isRemapping = true;
-			actionToRemap = action;
-			remappingButton = inputButton;
+			IsRemapping = true;
+			ActionToRemap = action;
+			RemappingButton = inputButton;
 			inputButton.Text = "...";
 		}
 	}
@@ -119,7 +121,7 @@ public partial class OptionsMenu : CanvasLayer
 	public void OnResetButtonPressed()
 	{
 		// recall the function to cruch all modifications (in others words, reset the inputs list)
-		createInputsList();
+		CreateInputsList();
 	}
 
 	//  -------------------------------- Video part ----------------------------------
@@ -181,8 +183,8 @@ public partial class OptionsMenu : CanvasLayer
 		// close the options menu, and re open the pause menu
 		if (pauseMenu != null)
 		{
-			setOptionsMenu(false);
-			pauseMenu.setPauseMenu(true, true);
+			SetOptionsMenu(false);
+			pauseMenu.SetPauseMenu(true, true);
 		}
 	}
 }

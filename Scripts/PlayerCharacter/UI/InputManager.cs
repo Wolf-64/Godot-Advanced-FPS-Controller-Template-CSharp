@@ -14,7 +14,7 @@ public partial class InputManager : Control
 	public override void _Input(InputEvent inputEvent)
 	{
 		// this function handle the input of the inputBox, but more specifically in this case the keybinding mechanic
-		if (optionsMenu.isRemapping)
+		if (optionsMenu.IsRemapping)
 		{
 			if (inputEvent is InputEventKey || (inputEvent is InputEventMouseButton && inputEvent.IsPressed()))
 			{
@@ -23,14 +23,14 @@ public partial class InputManager : Control
 					mouseButton.DoubleClick = false; // to avoid double clicks changes
 
 					// remap the action, by setting a new input event, and change the name displayed
-					InputMap.ActionEraseEvents(optionsMenu.actionToRemap);
-					InputMap.ActionAddEvent(optionsMenu.actionToRemap, inputEvent);
-					optionsMenu.remappingButton.Text = inputEvent.AsText().TrimSuffix("(Physical)");
+					InputMap.ActionEraseEvents(optionsMenu.ActionToRemap);
+					InputMap.ActionAddEvent(optionsMenu.ActionToRemap, inputEvent);
+					optionsMenu.RemappingButton.Text = inputEvent.AsText().TrimSuffix("(Physical)");
 
 					// reset the properties to default
-					optionsMenu.isRemapping = false;
-					optionsMenu.actionToRemap = null;
-					optionsMenu.remappingButton = null;
+					optionsMenu.IsRemapping = false;
+					optionsMenu.ActionToRemap = null;
+					optionsMenu.RemappingButton = null;
 
 					AcceptEvent(); // prevents the current input from being directly modified again, to re modify it, it must be clicked again
 				}
