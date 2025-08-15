@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dh3ln04ijax8n"]
 
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/PauseMenu.cs" id="1_33a0k"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Arts/Fonts/Ticketing.ttf" id="1_g88fa"]
-[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/PauseMenuScript.gd" id="1_oxp60"]
 [ext_resource type="PackedScene" uid="uid://bdhpuj7itpv6j" path="res://Scenes/OptionsMenuScene.tscn" id="3_0w74v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eaa6r"]
@@ -12,7 +12,7 @@ outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("optionsMenu")]
-script = ExtResource("1_oxp60")
+script = ExtResource("1_33a0k")
 optionsMenu = NodePath("OptionsMenu")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
@@ -83,6 +83,6 @@ text = "Quit"
 [node name="OptionsMenu" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_0w74v")]
 pauseMenu = NodePath("..")
 
-[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/OptionsButton" to="." method="OnOptionsButtonPressed"]
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPRessed"]

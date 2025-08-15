@@ -10,14 +10,18 @@ config_version=5
 
 [application]
 
-config/name="Advanced FPS controller template"
+config/name="Advanced FPS controller template (C#)"
 run/main_scene="res://Scenes/TemplateMapScene.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://Arts/TemplateImages/Icon.png"
 
 [display]
 
 window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="Advanced FPS controller template"
 
 [editor_plugins]
 

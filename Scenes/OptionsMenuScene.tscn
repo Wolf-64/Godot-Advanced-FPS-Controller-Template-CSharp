@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bdhpuj7itpv6j"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/OptionsMenuScript.gd" id="1_bupa7"]
-[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/InputManagerScript.gd" id="2_dr6kr"]
-[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/VolumeManagementScript.gd" id="4_ss2nf"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/OptionsMenu.cs" id="1_su2nt"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/InputManager.cs" id="2_lrieh"]
+[ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/VolumeSlider.cs" id="4_s6ubt"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Arts/Fonts/Ticketing.ttf" id="5_cvsgs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kjv5q"]
@@ -11,14 +11,14 @@ font = ExtResource("5_cvsgs")
 font_size = 42
 
 [node name="OptionsMenu" type="CanvasLayer"]
-script = ExtResource("1_bupa7")
+script = ExtResource("1_su2nt")
 
 [node name="InputManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("2_dr6kr")
+script = ExtResource("2_lrieh")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = 15
@@ -211,7 +211,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.001
 value = 1.0
-script = ExtResource("4_ss2nf")
+script = ExtResource("4_s6ubt")
 busName = "Master"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
@@ -227,7 +227,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.001
 value = 1.0
-script = ExtResource("4_ss2nf")
+script = ExtResource("4_s6ubt")
 busName = "Music"
 
 [node name="HSeparator3" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
@@ -243,7 +243,7 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.001
 value = 1.0
-script = ExtResource("4_ss2nf")
+script = ExtResource("4_s6ubt")
 busName = "Sound"
 
 [node name="BackButton" type="Button" parent="."]
@@ -263,8 +263,8 @@ theme_override_fonts/font = ExtResource("5_cvsgs")
 theme_override_font_sizes/font_size = 47
 text = "Back"
 
-[connection signal="pressed" from="TabContainer/Controls/Control/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="TabContainer/Video/CenterContainer/VBoxContainer/FullscreenOption/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_pressed"]
-[connection signal="item_selected" from="TabContainer/Video/CenterContainer/VBoxContainer/ResolutionOption/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="pressed" from="TabContainer/Audio/CenterContainer/VBoxContainer/VolumeLabels/MuteOption/CheckBox" to="." method="_on_check_box_pressed"]
-[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="TabContainer/Controls/Control/ResetButton" to="." method="OnResetButtonPressed"]
+[connection signal="pressed" from="TabContainer/Video/CenterContainer/VBoxContainer/FullscreenOption/FullscreenCheckBox" to="." method="OnFullScreenCheckBoxPressed"]
+[connection signal="item_selected" from="TabContainer/Video/CenterContainer/VBoxContainer/ResolutionOption/OptionButton" to="." method="OnOptionButtonItemSelected"]
+[connection signal="pressed" from="TabContainer/Audio/CenterContainer/VBoxContainer/VolumeLabels/MuteOption/CheckBox" to="." method="OnCheckBoxSelected"]
+[connection signal="pressed" from="BackButton" to="." method="OnBackButtonPressed"]
