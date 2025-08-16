@@ -11,9 +11,9 @@ font_size = 80
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
-[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("optionsMenu")]
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("OptionsMenu")]
 script = ExtResource("1_33a0k")
-optionsMenu = NodePath("OptionsMenu")
+OptionsMenu = NodePath("OptionsMenu")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 self_modulate = Color(1, 1, 1, 0)

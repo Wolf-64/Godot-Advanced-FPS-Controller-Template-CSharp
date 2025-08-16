@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://oj3blpxqf1bl"]
+[gd_scene load_steps=15 format=3 uid="uid://oj3blpxqf1bl"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_tvhlt"]
 [ext_resource type="Texture2D" uid="uid://cosanfwg57e4y" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_v37ox"]
@@ -17,6 +17,11 @@ background_mode = 2
 sky = SubResource("Sky_iebnq")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Curve" id="Curve_j8ud1"]
+max_value = 10.0
+_data = [Vector2(0.248092, 8.66297), 0.0, 0.0, 0, 0, Vector2(0.580153, 7.84019), 0.0, 0.0, 0, 0, Vector2(0.90458, 6.91456), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3yst"]
 albedo_texture = ExtResource("2_v37ox")
@@ -64,6 +69,7 @@ shadow_enabled = true
 
 [node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_tvhlt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5544, 1.54036, 0)
+InAirMoveSpeedCurve = SubResource("Curve_j8ud1")
 
 [node name="Map" type="Node3D" parent="."]
 

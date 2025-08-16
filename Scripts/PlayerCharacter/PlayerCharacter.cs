@@ -1061,13 +1061,29 @@ public partial class PlayerCharacter : CharacterBody3D
 			if (lastCollision != null)
 			{
 				CollisionObject3D collidedBody = lastCollision.GetCollider() as CollisionObject3D;
-				uint layer = collidedBody.CollisionLayer;
+				if (collidedBody != null)
+				{
+					uint layer = collidedBody.CollisionLayer;
 
-				// here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
-				if ((layer & (1 << 3 - 1)) != 0)
-					canWallRun = true;
+					// here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
+					if ((layer & (1 << 3 - 1)) != 0)
+						canWallRun = true;
+					else
+						canWallRun = false;
+				}
 				else
-					canWallRun = false;
+				{
+					CsgShape3D csgShape = lastCollision.GetCollider() as CsgShape3D;
+					if (csgShape != null)
+					{
+						uint layer = csgShape.CollisionLayer;
+
+						if ((layer & (1 << 3 - 1)) != 0)
+							canWallRun = true;
+						else
+							canWallRun = false;
+					}
+				}
 			}
 		}
 	}

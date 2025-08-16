@@ -13,6 +13,7 @@ public partial class PauseMenu : CanvasLayer
 	public override void _Ready()
 	{
 		SetPauseMenu(false, false);
+		OptionsMenu = GetNode<OptionsMenu>("OptionsMenu");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +24,6 @@ public partial class PauseMenu : CanvasLayer
 		// when the mouse is visible, you can see it, and she's enable
 		if (Input.IsActionJustPressed("pauseMenu"))
 		{
-			GD.Print("options menu enabled " + OptionsMenu.OptionsMenuEnabled);
 			if (!OptionsMenu.OptionsMenuEnabled)
 			{
 				if (PauseMenuEnabled)

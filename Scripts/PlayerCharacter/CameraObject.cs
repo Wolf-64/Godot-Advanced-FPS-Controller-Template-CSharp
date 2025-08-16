@@ -153,8 +153,8 @@ public partial class CameraObject : Node3D
 		{
 			// the bobbing doesn't apply when the character is sliding or is dashing
 			HeadBobValue += delta * playerChar.Velocity.Length() * (playerChar.IsOnFloor() ? 1.0f : 0.0f);
-	
-			Transform3D transform = new Transform3D();
+
+			Transform3D transform = camera.Transform;
 			transform.Origin = Headbob(HeadBobValue);
 			camera.Transform = transform; // apply the bob effect obtained to the camera
 		}
@@ -163,7 +163,9 @@ public partial class CameraObject : Node3D
 	public Vector3 Headbob(float time)
 	{
 		// some trigonometry stuff here, basically it uses the cosinus and sinus functions (sinusoidal function) to get a nice and smooth bob effect
-		return new Vector3(Mathf.Cos(time * BobFrequency / 2) * BobAmplitude, Mathf.Sin(time * BobFrequency) * BobAmplitude, 0.0f);;
+		float y = Mathf.Sin(time * BobFrequency) * BobAmplitude;
+		float x = Mathf.Cos(time * BobFrequency / 2) * BobAmplitude;
+		return new Vector3(x, y, 0.0f);
 	}
 
 	public void CameraTilt(float delta)

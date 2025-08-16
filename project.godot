@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Advanced FPS controller template (C#)"
 run/main_scene="res://Scenes/TemplateMapScene.tscn"
+run/enable_alt_space_menu=true
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://Arts/TemplateImages/Icon.png"
 
