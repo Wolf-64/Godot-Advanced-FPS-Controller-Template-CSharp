@@ -153,7 +153,6 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
 collision_layer = 2
-floor_block_on_wall = false
 floor_max_angle = 1.309
 floor_snap_length = 0.0
 platform_floor_layers = 4294901761
