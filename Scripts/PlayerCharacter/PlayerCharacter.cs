@@ -245,23 +245,35 @@ public partial class PlayerCharacter : CharacterBody3D
 
         // disable the crouch hitbox, enable is standing one
         if (!_crouchHitbox.Disabled)
+        {
             _crouchHitbox.Disabled = true;
+        }
         if (_standHitbox.Disabled)
+        {
             _standHitbox.Disabled = false;
+        }
 
         // set the raycasts
         if (!_ceilingCheck.Enabled)
+        {
             _ceilingCheck.Enabled = true;
+        }
         if (!_floorCheck.Enabled)
+        {
             _floorCheck.Enabled = true;
+        }
         if (!_grappleHookCheck.Enabled)
+        {
             _grappleHookCheck.Enabled = true;
+        }
 
         // -grapHookMaxDist to be in the player's direction
-        _grappleHookCheck.TargetPosition = new Vector3(-GrapHookMaxDist, 0.0f, 0.0f);
+            _grappleHookCheck.TargetPosition = new Vector3(-GrapHookMaxDist, 0.0f, 0.0f);
         if (_grapHookRope.Visible)
+        {
             _grapHookRope.Visible = false;
-
+        }
+        
         // set the mesh scale of the character
         _mesh.Scale = new Vector3(1.0f, 1.0f, 1.0f);
     }
@@ -456,7 +468,9 @@ public partial class PlayerCharacter : CharacterBody3D
 
         // not a property, but a visual
         if (currentState == State.DASH)
+        {
             _hud.DisplaySpeedLinesAsync(DashTime);
+        }
     }
 
     void Applies(double delta)
@@ -483,49 +497,49 @@ public partial class PlayerCharacter : CharacterBody3D
                 {
                     currentState = State.JUMP;
                 }
-                else
+            }
+            else
+            {
+                if (currentState != State.GRAPPLE)
                 {
-                    if (currentState != State.GRAPPLE)
-                    {
-                        Velocity = new Vector3(
-                            Velocity.X,
-                            (float)(Velocity.Y + _fallGravity * delta),
-                            Velocity.Z);
-                    }
-
-                    if (currentState != State.SLIDE
-                            && currentState != State.DASH
-                            && currentState != State.GRAPPLE)
-                    {
-                        currentState = State.INAIR;
-                    }
+                    Velocity = new Vector3(
+                        Velocity.X,
+                        (float)(Velocity.Y + _fallGravity * delta),
+                        Velocity.Z);
                 }
 
-                if (currentState == State.SLIDE)
+                if (currentState != State.SLIDE
+                        && currentState != State.DASH
+                        && currentState != State.GRAPPLE)
                 {
-                    // if the character start slide on the ground, and then jumps, the slide is canceled
-                    if (!_startSlideInAir)
-                    {
-                        SlideTime = -1;
-                    }
+                    currentState = State.INAIR;
                 }
+            }
 
-                if (currentState == State.DASH)
+            if (currentState == State.SLIDE)
+            {
+                // if the character start slide on the ground, and then jumps, the slide is canceled
+                if (!_startSlideInAir)
                 {
-                    // set the y axis velocity to 0, to allow the character to not be affected by gravity while dashing
-                    Velocity = new Vector3(Velocity.X, 0.0f, Velocity.Z);
+                    SlideTime = -1;
                 }
+            }
 
-                if (HitGroundCooldown != _hitGroundCooldownRef)
-                {
-                    // reset the before bunny hopping value
-                    HitGroundCooldown = _hitGroundCooldownRef;
-                }
+            if (currentState == State.DASH)
+            {
+                // set the y axis velocity to 0, to allow the character to not be affected by gravity while dashing
+                Velocity = new Vector3(Velocity.X, 0.0f, Velocity.Z);
+            }
 
-                if (CoyoteJumpCooldown > 0.0)
-                {
-                    CoyoteJumpCooldown -= delta;
-                }
+            if (HitGroundCooldown != _hitGroundCooldownRef)
+            {
+                // reset the before bunny hopping value
+                HitGroundCooldown = _hitGroundCooldownRef;
+            }
+
+            if (CoyoteJumpCooldown > 0.0)
+            {
+                CoyoteJumpCooldown -= delta;
             }
         }
         if (IsOnFloor())
