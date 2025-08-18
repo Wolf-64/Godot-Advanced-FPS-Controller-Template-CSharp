@@ -1,6 +1,11 @@
 
 An advanced FPS Controller Template made in Godot 4
 
+This is a fork of Jeh3no's [Godot-Advanced-FPS-Controller-Template](github.com/Jeh3no/Godot-Advanced-FPS-Controller-Template) written in GDScript.
+#### All credit goes to Jeh3no. I have simply ported the scripts over to C# for those preferring Mono/.NET over GDScript.
+Any feature requests are to be directed to Jeh3no. Issue reports will be investigated and relayed to Jeh3no's project if they are not related to my direct port of the project. 
+
+## **Original Description**
 
 ![Template logo](Arts/TemplateImages/Logo.png)
 
@@ -12,13 +17,13 @@ This template provides a complete, advanced and fully commented controller, came
 
 A template map is provided to test the controller.
 
-The controller use a finite state machine, designed to be easely editable, allowing to easily add, remove and modify behaviours and actions.
+The controller uses a finite state machine, designed to be easily editable, allowing to easily add, remove and modify behaviours and actions.
 
-He is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
+It is also very customizable, with a whole set of open variables for every state and for more general stuff. This is the same for the camera.
 
-The template is 100% written in GDScript.
+The template is 100% written in C#.
 
-He works on Godot 4.3 and Godot 4.2.
+It works on Godot 4.3 and Godot 4.2.
 I didn't test it in Godot 4.1 and Godot 4.0, but it should work just fine.
 
 The video showcasing the template features : https://www.youtube.com/watch?v=qdmzIYgVb1E
