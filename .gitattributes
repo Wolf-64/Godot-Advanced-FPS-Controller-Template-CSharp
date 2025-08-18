@@ -1,2 +1,27 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# --- ignore upstream’s GDScript on conflicts ---
+*.cs       merge=ours
+*.csproj   merge=ours
+*.sln      merge=ours
+*.editorconfig merge=ours
+
+*.gd       merge=ours
+*.gdnlib   merge=ours
+*.gdextension merge=ours
+
+# --- normally merge Godot text assets ---
+*.tscn text eol=lf
+*.tres text eol=lf
+*.shader text eol=lf
+
+# --- no text diffs; resolve consciously if conflicted ---
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ogg  binary
+*.wav  binary
+*.mp3  binary
+*.scn  binary
