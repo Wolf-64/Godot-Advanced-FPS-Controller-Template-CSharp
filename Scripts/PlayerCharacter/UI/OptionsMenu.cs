@@ -17,9 +17,13 @@ public partial class OptionsMenu : CanvasLayer
     private bool _fullscreeenOn = false;
     // @onready 
     private OptionButton _resolOptionsButton;
+
+    /// <summary>
+    /// List of resolution tuples (with, height).
+    /// </summary>
     private Dictionary<int, (int, int)> _resList = new Dictionary<int, (int, int)>();
 
-    // list of inputs actions to display (key is input name used by Godot, value is what is displayed to the user)
+    // List of input actions to display (key is input name used by Godot, value is what is displayed to the user)
     private Dictionary<string, string> _inputActions = new Dictionary<string, string>() {
         { "moveLeft", "Move left" },
         { "moveRight", "Move right" },
@@ -44,7 +48,6 @@ public partial class OptionsMenu : CanvasLayer
 
     public bool OptionsMenuEnabled { get; set; } = false;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _inputKeybindBox = ResourceLoader.Load<PackedScene>
@@ -67,16 +70,15 @@ public partial class OptionsMenu : CanvasLayer
 
     public void SetOptionsMenu(bool value)
     {
-        // set the options penu behaviour
         Visible = value;
         OptionsMenuEnabled = value;
     }
 
     // -------------------------------- Input part ----------------------------------
-    // this function handle the inputs list creation
     public void CreateInputsList()
     {
-        InputMap.LoadFromProjectSettings(); // load the inputs set in the project settings
+        // load inputs set in the project settings
+        InputMap.LoadFromProjectSettings();
 
         // clear inputs (to avoid duplicates and remove unwanted inputs boxes)
         foreach (var inputBoxIndex in _inputList.GetChildren())
@@ -84,18 +86,17 @@ public partial class OptionsMenu : CanvasLayer
             inputBoxIndex.QueueFree();
         }
 
-        //  for each action/input
         foreach (string action in _inputActions.Keys)
         {
             // create an instance of the inputBox scene
             Node inputBox = _inputKeybindBox.Instantiate();
 
-            //  get the child nodes
+            // get the child nodes
             var actionLabel = inputBox.FindChild("ActionLabel") as Label;
             var inputButton = inputBox.FindChild("InputButton") as Button;
             actionLabel.Text = _inputActions[action];
 
-            //  set action name
+            // set action name
             Godot.Collections.Array<InputEvent> events = InputMap.ActionGetEvents(action);
             if (events.Count > 0)
             {
@@ -121,7 +122,7 @@ public partial class OptionsMenu : CanvasLayer
 
     public void OnInputButtonPressed(Button inputButton, string action)
     {
-        // select properties to modify, and so call the keybinding function
+        // select properties to modify and call the keybinding function
         // (which is in the inputBox script)
         if (!IsRemapping)
         {
@@ -132,26 +133,28 @@ public partial class OptionsMenu : CanvasLayer
         }
     }
 
+    /// <summary>
+    /// Resets inputs to default values.
+    /// </summary>
     public void OnResetButtonPressed()
     {
-        // recall the function to cruch all modifications (in others words, reset the inputs list)
         CreateInputsList();
     }
 
     //  -------------------------------- Video part ----------------------------------
-    // this function handles the screen resolutions fill for the options button
     private void CreateResolutionsSelection()
     {
+        // list of resolutions to add to the selection
         List<(int, int)> resToAdd = new List<(int width, int height)>
         {
             (1920, 1080),
             (1280, 720),
             (1152, 648),
             (768, 432)
-        }; // list of resolutions to add
+        };
 
-        // for each resolution, get the width and height, add them to the resolution List (which will be useful for the resize option)
-        // and add them to the options button
+        // for each resolution, get the width and height, add them to the resolution List 
+        // (which will be useful for the resize option) and add them to the options button
         for (int res = 0; res < resToAdd.Count; res++)
         {
             var (widthVal, heightVal) = resToAdd[res];
@@ -162,7 +165,9 @@ public partial class OptionsMenu : CanvasLayer
         _resolOptionsButton.Select(2);
     }
 
-    // this function handle the fullscreen option, by changing the window display mode
+    /// <summary>
+    /// This function handles the fullscreen option, by changing the window display mode
+    /// </summary>
     public void OnFullScreenCheckBoxPressed()
     {
         _fullscreeenOn = !_fullscreeenOn;
@@ -176,27 +181,33 @@ public partial class OptionsMenu : CanvasLayer
             DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
         }
     }
-    public void OnOptionButtonItemSelected(int ind)
+
+    /// <summary>
+    /// Applies the selected resolution from the list (index).
+    /// </summary>
+    /// <param name="index"></param>
+    public void OnOptionButtonItemSelected(int index)
     {
-        // this function handle the resize window option, by getting the corresponding values 
-        // from resList, and applying them to the window
-        // ind+1 because the createResolutionsSelection loop has begun at 1
-        int resWidth = _resList[ind].Item1;
-        int resHeight = _resList[ind].Item2;
+        int resWidth = _resList[index].Item1;
+        int resHeight = _resList[index].Item2;
         DisplayServer.WindowSetSize(new Vector2I(resWidth, resHeight));
     }
 
     //  -------------------------------- Audio part ----------------------------------
+    /// <summary>
+    /// This function handles the mute option.
+    /// </summary>
     public void OnCheckBoxSelected()
     {
-        // this function handle the mute option
         AudioServer.SetBusMute(_masterBusIndex, !_volumeIsMute);
         _volumeIsMute = !_volumeIsMute;
     }
 
+    /// <summary>
+    /// Closes the options menu, and re-opens the pause menu.
+    /// </summary>
     public void OnBackButtonPressed()
     {
-        // close the options menu, and re open the pause menu
         if (pauseMenu != null)
         {
             SetOptionsMenu(false);

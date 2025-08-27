@@ -85,4 +85,4 @@ pauseMenu = NodePath("..")
 
 [connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="OnResumeButtonPressed"]
 [connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/OptionsButton" to="." method="OnOptionsButtonPressed"]
-[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPRessed"]
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="OnQuitButtonPressed"]

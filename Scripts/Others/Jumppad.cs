@@ -3,10 +3,14 @@ using System;
 
 public partial class Jumppad : CsgCylinder3D
 {
-    [ExportGroup("value variables")]
+    [ExportGroup("Value variables")]
     [Export]
     public float JumpBoostValue { get; set; }
-    // Called when the node enters the scene tree for the first time.
+
+    /// <summary>
+    /// Hook up this event to an Area3D node attached to your jumppad
+    /// </summary>
+    /// <param name="area"></param>
     public void OnArea3DAreaEntered(Area3D area)
     {
         if (area.GetParent() is PlayerCharacter player)

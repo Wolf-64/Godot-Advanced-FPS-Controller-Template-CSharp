@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Manager used in options menu to allow key rebinding.
+/// </summary>
 public partial class InputManager : Control
 {
     // @onready
@@ -11,18 +14,22 @@ public partial class InputManager : Control
         _optionsMenu = GetNode<OptionsMenu>("..");
     }
 
+    /// <summary>
+    /// This function handles the keybinding mechanic.
+    /// </summary>
+    /// <param name="event"></param>
     public override void _Input(InputEvent @event)
     {
-        // this function handle the input of the inputBox, but more specifically in this case the keybinding mechanic
         if (_optionsMenu.IsRemapping)
         {
             if (@event is InputEventKey || (@event is InputEventMouseButton && @event.IsPressed()))
             {
-                if (@event is InputEventMouseButton mouseButton && mouseButton.DoubleClick) 
+                if (@event is InputEventMouseButton mouseButton && mouseButton.DoubleClick)
                 {
-                    mouseButton.DoubleClick = false; // to avoid double clicks changes
+                    // to avoid double clicks changes
+                    mouseButton.DoubleClick = false;
 
-                    // remap the action, by setting a new input event, and change the name displayed
+                    // remap the action by setting a new input event, and change the name displayed
                     InputMap.ActionEraseEvents(_optionsMenu.ActionToRemap);
                     InputMap.ActionAddEvent(_optionsMenu.ActionToRemap, @event);
                     _optionsMenu.RemappingButton.Text = @event.AsText().TrimSuffix("(Physical)");
@@ -32,7 +39,8 @@ public partial class InputManager : Control
                     _optionsMenu.ActionToRemap = null;
                     _optionsMenu.RemappingButton = null;
 
-                    AcceptEvent(); // prevents the current input from being directly modified again, to re modify it, it must be clicked again
+                    // prevents the current input from being directly modified again, to re modify it, it must be clicked again
+                    AcceptEvent();
                 }
             }
         }

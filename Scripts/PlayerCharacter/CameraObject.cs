@@ -3,8 +3,7 @@ using System;
 
 public partial class CameraObject : Node3D
 {
-    //  camera variables
-    [ExportGroup("camera variables")]
+    [ExportGroup("Camera variables")]
     [Export]
     public float XAxisSensibility { get; set; } = 0.008f;
     [Export]
@@ -14,8 +13,7 @@ public partial class CameraObject : Node3D
     [Export]
     public float MaxDownAngleView { get; set; } = 90f;
 
-    //  movement changes variables
-    [ExportGroup("movement changes variables")]
+    [ExportGroup("Movement changes variables")]
     [Export]
     public float CrouchCameraDepth { get; set; } = -0.2f;
     [Export]
@@ -25,8 +23,7 @@ public partial class CameraObject : Node3D
     [Export]
     public float SlideCameraLerpSpeed { get; set; } = 8f;
 
-    //  fov variables
-    [ExportGroup("fov variables")]
+    [ExportGroup("Fov variables")]
     private float _targetFOV;
     private float _lastFOV;
     private float _addonFOV;
@@ -45,8 +42,7 @@ public partial class CameraObject : Node3D
     [Export]
     public float FovChangeSpeedWhenDash { get; set; } = 3f;
 
-    //  bob variables
-    [ExportGroup("bob variables")]
+    [ExportGroup("Bob variables")]
     [Export]
     public float HeadBobValue { get; set; }
     [Export]
@@ -54,15 +50,13 @@ public partial class CameraObject : Node3D
     [Export]
     public float BobAmplitude { get; set; } = 0.06f;
 
-    //  tilt variables
-    [ExportGroup("tilt variables")]
+    [ExportGroup("Tilt variables")]
     [Export]
     public float CamTiltRotationValue { get; set; } = 0.35f;
     [Export]
     public float CamTiltRotationSpeed { get; set; } = 2.2f;
 
-    //  shake variables
-    [ExportGroup("camera shake variables")]
+    [ExportGroup("Camera shake variables")]
     private float _shakeForce;
     [Export]
     public float ShakeDuration { get; set; } = 0.35f;
@@ -72,14 +66,13 @@ public partial class CameraObject : Node3D
     RandomNumberGenerator rng = new RandomNumberGenerator();
     private bool _canCameraShake = false;
 
-    // input variables
-    [ExportGroup("input variables")]
+    [ExportGroup("Input variables")]
     Vector2 mouseInput;
     [Export]
     public float MouseInputSpeed { get; set; } = 2f;
     private Vector2 _playCharInputDir;
 
-    //  references variables
+    //  reference variables
     // @onready
     private Camera3D _camera;
     // @onready
@@ -87,7 +80,6 @@ public partial class CameraObject : Node3D
     // @onready
     private PauseMenu _pauseMenu;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _camera = GetNode<Camera3D>("Camera3D");
@@ -102,10 +94,11 @@ public partial class CameraObject : Node3D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        // this function manage camera rotation (360 on x axis, blocked at <= -60 and >= 60 on 
+        // this function manages camera rotation (360 on x axis, blocked at <= -60 and >= 60 on 
         // y axis, to not having the character do a complete head turn, which will be kinda weird)
         if (!_pauseMenu.PauseMenuEnabled)
-        { // can only rotate when the ui is not opened
+        {
+            // can only rotate when the ui is not opened
             if (@event is InputEventMouseMotion mouseMotion)
             {
                 RotateY(-mouseMotion.Relative.X * XAxisSensibility);
@@ -119,26 +112,28 @@ public partial class CameraObject : Node3D
                     _camera.Rotation.Y,
                     _camera.Rotation.Z);
                 // get position of the mouse in a 2D sceen, so save it in a Vector2 
-                mouseInput = mouseMotion.Relative; 
+                mouseInput = mouseMotion.Relative;
             }
         }
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         Applies((float)delta);
         CameraBob((float)delta);
         CameraTilt((float)delta);
         FOVChange((float)delta);
-        _lastFOV = _targetFOV; // get the last FOV used
+
+        // store the last FOV used
+        _lastFOV = _targetFOV;
     }
 
-
+    /// <summary>
+    /// Hanldes the different camera modifications relative to a specific state, except for the FOV.
+    /// </summary>
+    /// <param name="delta"></param>
     public void Applies(float delta)
     {
-        // this function manage the differents camera modifications relative to a specific state, 
-        // except for the FOV
         float newPosY = 0.0f;
         float newRotZ = 0.0f;
         switch (_playerChar.currentState)
@@ -162,7 +157,7 @@ public partial class CameraObject : Node3D
                     Rotation.Z,
                     Mathf.DegToRad(6.0f) *
                         (!Mathf.IsEqualApprox(_playCharInputDir.X, 0.0f)
-                            ? _playCharInputDir.X 
+                            ? _playCharInputDir.X
                             : Mathf.DegToRad(6.0f)),
                     SlideCameraLerpSpeed * delta);
                 break;
@@ -173,7 +168,7 @@ public partial class CameraObject : Node3D
                     Rotation.Z,
                     Mathf.DegToRad(10.0f) *
                         (!Mathf.IsEqualApprox(_playCharInputDir.X, 0.0f)
-                            ? _playCharInputDir.X 
+                            ? _playCharInputDir.X
                             : Mathf.DegToRad(10.0f)),
                     SlideCameraLerpSpeed * delta);
                 break;
@@ -183,9 +178,13 @@ public partial class CameraObject : Node3D
         Rotation = new Vector3(Rotation.X, Rotation.Y, newRotZ);
     }
 
-    public void CameraBob(float delta)
+    /// <summary>
+    /// Handles the bobbing of the camera when the character is moving.
+    /// </summary>
+    /// <param name="delta"></param>
+    private void CameraBob(float delta)
     {
-        // this function manage the bobbing of the camera when the character is moving
+        // 
         if (_playerChar.currentState != PlayerCharacter.State.SLIDE
                 && _playerChar.currentState != PlayerCharacter.State.DASH)
         {
@@ -194,11 +193,12 @@ public partial class CameraObject : Node3D
 
             Transform3D transform = _camera.Transform;
             transform.Origin = Headbob(HeadBobValue);
-            _camera.Transform = transform; // apply the bob effect obtained to the camera
+            // apply the calculated bob effect
+            _camera.Transform = transform;
         }
     }
 
-    public Vector3 Headbob(float time)
+    private Vector3 Headbob(float time)
     {
         // some trigonometry stuff here, basically it uses the cosinus and sinus functions 
         // (sinusoidal function) to get a nice and smooth bob effect
@@ -207,16 +207,21 @@ public partial class CameraObject : Node3D
         return new Vector3(x, y, 0.0f);
     }
 
-    public void CameraTilt(float delta)
+    /// <summary>
+    /// Handles the camera tilting when the character is moving on the x axis (left and right)
+    /// </summary>
+    /// <param name="delta"></param>
+    private void CameraTilt(float delta)
     {
-        // this function manage the camera tilting when the character is moving on the x axis (left and right)
+        // the camera tilting doesn't apply when the character is not moving, or is crouching or walking  
         if (_playerChar.MoveDirection != Vector3.Zero
                 && _playerChar.currentState != PlayerCharacter.State.CROUCH
                 && _playerChar.currentState != PlayerCharacter.State.SLIDE)
         {
-            // the camera tilting doesn't apply when the character is not moving, or is crouching or walking  
-            _playCharInputDir = _playerChar.InputDirection; // get input direction to know where the character is heading to
-                                                            // apply smooth tilt movement
+            // get input direction to know where the character is heading to
+            _playCharInputDir = _playerChar.InputDirection;
+
+            // apply smooth tilt movement
             if (!_playerChar.IsOnFloor())
             {
                 Rotation = new Vector3(
@@ -233,7 +238,8 @@ public partial class CameraObject : Node3D
             }
         }
     }
-    public void FOVChange(float delta)
+
+    private void FOVChange(float delta)
     {
         // FOV addon used to keep a logic FOV (for example, FOV when the character jumps right 
         // after running should be a bit higher than when he jumps right after walking)

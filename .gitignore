@@ -13,3 +13,9 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# VSCode-specific ignores
+Godot-Advanced-FPS-Controller-Template-CSharp.code-workspace
+.vscode/launch.json
+.vscode/ruleset.xml
+.vscode/tasks.json

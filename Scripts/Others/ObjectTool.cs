@@ -4,8 +4,16 @@ using System;
 public partial class ObjectTool : Node3D
 {
     [ExportGroup("Knockback variables")]
+
+    /// <summary>
+    /// Force of knockback action.
+    /// </summary>
     [Export]
     public float KnockbackAmount { get; set; } = 36f;
+
+    /// <summary>
+    /// Cooldown of knockback action.
+    /// </summary>
     [Export]
     public float WaitTimeBefCanUseKnobaAgain { get; set; } = 0.31f;
     private float _waitTimeBefCanUseKnobaAgainRef;
@@ -20,7 +28,6 @@ public partial class ObjectTool : Node3D
     [Signal]
     public delegate void sendKnockbackEventHandler(float amount, Vector3 direction);
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _knockbackToolAttackPoint = GetNode<Node3D>("KnockbackTool/KnockbackToolAttackPoint");
@@ -29,7 +36,6 @@ public partial class ObjectTool : Node3D
         _waitTimeBefCanUseKnobaAgainRef = WaitTimeBefCanUseKnobaAgain;
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         Use((float)delta);
@@ -37,6 +43,10 @@ public partial class ObjectTool : Node3D
         SendProperties();
     }
 
+    /// <summary>
+    /// Invokes knockback action.
+    /// </summary>
+    /// <param name="_delta"></param>
     private void Use(float _delta)
     {
         if (Input.IsActionJustPressed("useKnockbackTool"))
@@ -52,13 +62,20 @@ public partial class ObjectTool : Node3D
         }
     }
 
-    public void TimeManagement(float delta)
+    /// <summary>
+    /// Handles cooldown.
+    /// </summary>
+    /// <param name="delta"></param>
+    private void TimeManagement(float delta)
     {
         if (WaitTimeBefCanUseKnobaAgain > 0.0)
             WaitTimeBefCanUseKnobaAgain -= delta;
     }
 
-    public void SendProperties()
+    /// <summary>
+    /// Handles HUD value display.
+    /// </summary>
+    private void SendProperties()
     {
         // display knockback tool properties
         _hud.DisplayKnockbackToolWaitTime(WaitTimeBefCanUseKnobaAgain);
