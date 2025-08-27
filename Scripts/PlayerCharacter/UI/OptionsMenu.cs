@@ -98,18 +98,15 @@ public partial class OptionsMenu : CanvasLayer
 
             // set action name
             Godot.Collections.Array<InputEvent> events = InputMap.ActionGetEvents(action);
+            inputButton.Text = "";
             if (events.Count > 0)
             {
                 inputButton.Text = events[0].AsText().TrimSuffix("(Physical)");
             }
-            else
-            {
-                inputButton.Text = "";
-            }
 
             _inputList.AddChild(inputBox);
             // connect button pressed signal to "OnInputButtonPressed" function
-            inputButton.Pressed += () => OnInputButtonPressed(inputButton, action); 
+            inputButton.Pressed += () => OnInputButtonPressed(inputButton, action);
 
             // create and initialize a separator to add between each instance of inputBox
             HSeparator horSepar = new();
