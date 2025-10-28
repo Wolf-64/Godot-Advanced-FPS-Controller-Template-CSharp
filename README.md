@@ -1,7 +1,6 @@
 
 An advanced FPS Controller Template made in Godot 4
 
-This is a fork of Jeh3no's [Godot-Advanced-FPS-Controller-Template](github.com/Jeh3no/Godot-Advanced-FPS-Controller-Template) written in GDScript.
 #### All credit goes to Jeh3no. I have simply ported the scripts over to C# for those preferring Mono/.NET over GDScript.
 Any feature requests are to be directed to Jeh3no. Issue reports will be investigated and relayed to Jeh3no's project if they are not related to my direct port of the project. 
 
